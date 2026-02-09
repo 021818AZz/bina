@@ -30,7 +30,7 @@
         
         .toast-success {
             background-color: #000;
-            border-left: 4px solid #10B981;
+            border-left: 4px solid #f59e0b;
         }
         
         .toast-error {
@@ -80,14 +80,14 @@
     </style>
 </head>
 
-<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+<body class="bg-yellow-50 text-neutral-900 min-h-screen font-sans">
     <div class="max-w-md mx-auto pb-24">
         <!-- Header -->
         <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-slate-200">
         <a href="javascript:history.back()" class="text-slate-500 text-xl font-bold">&#8592;</a>
 
-            <h1 class="text-lg font-bold text-green-800 tracking-tight">Área de Saque</h1>
-            <a href="historico-saques.html" class="text-green-600 hover:text-green-700 transition-colors" title="Histórico de Saques">
+            <h1 class="text-lg font-bold text-yellow-800 tracking-tight">Área de Saque</h1>
+            <a href="historico-saques.html" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Histórico de Saques">
                 <i class='bx bx-history text-2xl'></i>
             </a>
         </header>
@@ -107,7 +107,7 @@
         <section class="px-5 mt-8">
             <form id="formSaque" class="space-y-5">
                 <div>
-                    <label for="contaBancaria" class="text-sm font-medium text-green-800 block mb-1">Conta Bancária</label>
+                    <label for="contaBancaria" class="text-sm font-medium text-yellow-800 block mb-1">Conta Bancária</label>
                     <select id="contaBancaria" name="bank_account" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required>
                         <option value="" disabled selected>Selecione sua conta</option>
                         <!-- Opções serão preenchidas via JavaScript -->
@@ -115,13 +115,13 @@
                 </div>
 
                 <div>
-                    <label for="valorSaque" class="text-sm font-medium text-green-800 block mb-1">Valor a sacar</label>
+                    <label for="valorSaque" class="text-sm font-medium text-yellow-800 block mb-1">Valor a sacar</label>
                     <div class="flex items-center bg-white border border-green-300 rounded-lg px-3 py-2 focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-200 transition">
-                        <span class="text-green-600 font-semibold mr-2">KZ</span>
+                        <span class="text-yellow-600 font-semibold mr-2">KZ</span>
                         <input id="valorSaque" name="amount" type="text" placeholder="0,00" class="w-full bg-transparent outline-none placeholder-green-400" oninput="formatarMoeda(this)" required />
                     </div>
                     <p class="text-xs text-red-500 mt-2">Taxa de saque: 20% (Será descontado automaticamente).</p>
-                    <p id="valorLiquido" class="text-xs text-green-600 mt-1 hidden">Valor líquido: KZ0.00</p>
+                    <p id="valorLiquido" class="text-xs text-yellow-600 mt-1 hidden">Valor líquido: KZ0.00</p>
                 </div>
 
                 <button id="btnSaque" type="submit" class="w-full gradient-futebol hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-[1.02] active:scale-[0.98]">
@@ -130,31 +130,31 @@
             </form>
 
             <div class="mt-6 text-xs text-green-700 leading-relaxed space-y-3 bg-white p-4 rounded-xl border border-green-200">
-                <h2 class="text-sm font-bold text-green-800 mb-3">Informações de Retirada</h2>
+                <h2 class="text-sm font-bold text-yellow-800 mb-3">Informações de Retirada</h2>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
-                    <p><strong>Valor do Saque:</strong> Deve estar entre <strong class="text-green-600">KZ1,200.00</strong> e <strong class="text-green-600">KZ2,000,000.00</strong>.</p>
+                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Valor do Saque:</strong> Deve estar entre <strong class="text-yellow-600">KZ1,200.00</strong> e <strong class="text-yellow-600">KZ2,000,000.00</strong>.</p>
                 </div>
 
                <div class="flex items-start gap-2">
-    <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
-    <p><strong>Horário de Retiradas:</strong> De <strong class="text-green-600">segunda a sexta-feira</strong>, das <strong class="text-green-600">11h30 às 15h30</strong>.</p>
+    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce mt-1"></div>
+    <p><strong>Horário de Retiradas:</strong> De <strong class="text-yellow-600">segunda a sexta-feira</strong>, das <strong class="text-yellow-600">11h30 às 15h30</strong>.</p>
 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
-                    <p><strong>Limite Diário:</strong> Apenas <strong class="text-green-600">um saque por dia</strong> deves realizar.</p>
+                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Limite Diário:</strong> Apenas <strong class="text-yellow-600">um saque por dia</strong> deves realizar.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-green-500 rounded-full animate-spin mt-1"></div>
-                    <p><strong>Prazo de Recebimento:</strong> De <strong class="text-green-600">20 minutos à 24h</strong> após a solicitação.</p>
+                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-spin mt-1"></div>
+                    <p><strong>Prazo de Recebimento:</strong> De <strong class="text-yellow-600">20 minutos à 24h</strong> após a solicitação.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
-                    <p><strong>Taxa de Saque:</strong> <strong class="text-green-600">20%</strong> sobre o valor solicitado.</p>
+                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce mt-1"></div>
+                    <p><strong>Taxa de Saque:</strong> <strong class="text-yellow-600">20%</strong> sobre o valor solicitado.</p>
                 </div>
             </div>
         </section>
@@ -169,8 +169,8 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
       <!-- Menu de navegação com ícones de imagem -->
-    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
-      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+        <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-yellow-100 rounded-t-2xl overflow-hidden">
+            <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 text-white text-xs">
         
         <li>
           <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">

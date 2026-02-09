@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conta Bancária - Royal</title>
+    <title>Conta Bancária - Biocycle</title>
     <script src="js/tailwindcss.js"></script>
     <link href="js/fonts.googleapis.css" rel="stylesheet">
     <style>
@@ -30,7 +30,7 @@
         
         .toast-success {
             background-color: #000;
-            border-left: 4px solid #10B981;
+            border-left: 4px solid #f97316;
         }
         
         .toast-error {
@@ -57,42 +57,61 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Cores de futebol - verde e branco */
-        .bg-futebol-green {
-            background-color: #16a34a;
+        /* Cores de laranja */
+        .bg-laranja {
+            background-color: #fb923c;
         }
         
-        .bg-futebol-white {
+        .bg-laranja-white {
             background-color: #ffffff;
         }
         
-        .text-futebol-green {
-            color: #16a34a;
+        .text-laranja {
+            color: #fb923c;
         }
         
-        .border-futebol-green {
-            border-color: #16a34a;
+        .border-laranja {
+            border-color: #fb923c;
         }
         
-        .gradient-futebol {
-            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+        .gradient-laranja {
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+        }
+        
+        /* Gradientes específicos */
+        .gradient-laranja-suave {
+            background: linear-gradient(135deg, #fdba74 0%, #fb923c 100%);
+        }
+        
+        .gradient-laranja-forte {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        }
+        
+        .border-laranja-light {
+            border-color: #fed7aa;
+        }
+        
+        .text-laranja-dark {
+            color: #9a3412;
         }
     </style>
 </head>
 
-<body class="bg-yellow-50 text-neutral-900 min-h-screen font-sans">
+<body class="bg-orange-50 text-neutral-900 min-h-screen font-sans">
     <div class="max-w-md mx-auto pb-24">
         <!-- Header -->
-        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-slate-200">
-    <button onclick="history.back()" class="text-slate-500 text-xl font-bold">&#8592;</button>
-    <h1 class="text-lg font-bold text-yellow-800 tracking-tight">Conta Bancária</h1>
+        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-orange-100">
+    <button onclick="history.back()" class="text-orange-600 text-xl font-bold">&#8592;</button>
+    <h1 class="text-lg font-bold text-orange-800 tracking-tight flex items-center gap-2">
+        <span class="text-xl">🏦</span> Conta Bancária
+    </h1>
     <div></div>
 </header>
 
 
         <!-- Informações da Conta -->
         <section class="px-5 mt-6">
-            <div class="rounded-2xl gradient-futebol text-white p-5 flex items-center justify-between shadow-lg">
+            <div class="rounded-2xl gradient-laranja text-white p-5 flex items-center justify-between shadow-lg">
                 <div>
                     <p class="text-sm opacity-90 mb-1">Sua Conta Bancária</p>
                     <p id="contaStatus" class="text-lg font-bold">Cadastre sua conta</p>
@@ -105,8 +124,10 @@
         <section class="px-5 mt-8">
             <form id="formIban" class="space-y-4">
                 <div>
-                    <label for="bankName" class="text-sm font-medium text-yellow-800 block mb-1">Nome do Banco</label>
-                    <select id="bankName" name="bank_name" class="w-full border border-yellow-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition" required>
+                    <label for="bankName" class="text-sm font-medium text-orange-800 block mb-1 flex items-center gap-1">
+                        <span>🏦</span> Nome do Banco
+                    </label>
+                    <select id="bankName" name="bank_name" class="w-full border border-orange-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition" required>
                         <option value="" disabled selected>Selecione o banco</option>
                         <option value="BAI">BAI</option>
                         <option value="BFA">BFA</option>
@@ -116,74 +137,90 @@
                 </div>
 
                 <div>
-                    <label for="accountHolder" class="text-sm font-medium text-yellow-800 block mb-1">Titular da Conta</label>
-                    <input id="accountHolder" name="account_holder" type="text" placeholder="Nome completo do titular" class="w-full border border-yellow-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition" required />
+                    <label for="accountHolder" class="text-sm font-medium text-orange-800 block mb-1 flex items-center gap-1">
+                        <span>👤</span> Titular da Conta
+                    </label>
+                    <input id="accountHolder" name="account_holder" type="text" placeholder="Nome completo do titular" class="w-full border border-orange-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition" required />
                 </div>
 
                 <div>
-                    <label for="accountNumber" class="text-sm font-medium text-green-800 block mb-1">Número da Conta</label>
-                    <input id="accountNumber" name="account_number" type="text" placeholder="Número da conta iban" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required />
+                    <label for="accountNumber" class="text-sm font-medium text-orange-800 block mb-1 flex items-center gap-1">
+                        <span>🔢</span> Número da Conta
+                    </label>
+                    <input id="accountNumber" name="account_number" type="text" placeholder="Número da conta iban" class="w-full border border-orange-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition" required />
                 </div>
 
                 <div>
-                    <label for="branchCode" class="text-sm font-medium text-green-800 block mb-1">Seu Apelido</label>
-                    <input id="branchCode" name="branch_code" type="text" placeholder="Apelido" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required />
+                    <label for="branchCode" class="text-sm font-medium text-orange-800 block mb-1 flex items-center gap-1">
+                        <span>🏷️</span> Seu Apelido
+                    </label>
+                    <input id="branchCode" name="branch_code" type="text" placeholder="Apelido" class="w-full border border-orange-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition" required />
                 </div>
 
-                <button id="btnSalvar" type="submit" class="w-full gradient-futebol hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-[1.02] active:scale-[0.98]">
-                    Salvar Conta Bancária
+                <button id="btnSalvar" type="submit" class="w-full gradient-laranja-forte hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
+                    <span>💾</span> Salvar Conta Bancária
                 </button>
             </form>
 
             <!-- Informações da Conta Atual -->
             <div id="contaAtual" class="mt-6 hidden">
-                <div class="bg-white p-4 rounded-xl border border-yellow-200">
-                    <h3 class="text-sm font-bold text-yellow-800 mb-3">Conta Cadastrada</h3>
+                <div class="bg-white p-4 rounded-xl border border-orange-200">
+                    <h3 class="text-sm font-bold text-orange-800 mb-3 flex items-center gap-2">
+                        <span>✅</span> Conta Cadastrada
+                    </h3>
                     <div class="space-y-2 text-sm">
                         <div class="flex justify-between">
                             <span class="text-gray-600">Banco:</span>
-                            <span id="infoBankName" class="font-semibold text-yellow-700"></span>
+                            <span id="infoBankName" class="font-semibold text-orange-700"></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Titular:</span>
-                            <span id="infoAccountHolder" class="font-semibold text-yellow-700"></span>
+                            <span id="infoAccountHolder" class="font-semibold text-orange-700"></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Conta:</span>
-                            <span id="infoAccountNumber" class="font-semibold text-yellow-700"></span>
+                            <span id="infoAccountNumber" class="font-semibold text-orange-700"></span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-gray-600">Agência:</span>
-                            <span id="infoBranchCode" class="font-semibold text-yellow-700"></span>
+                            <span class="text-gray-600">Apelido:</span>
+                            <span id="infoBranchCode" class="font-semibold text-orange-700"></span>
                         </div>
                     </div>
-                    <button id="btnEditar" class="w-full mt-4 border border-yellow-500 text-yellow-600 hover:bg-yellow-50 transition font-semibold py-2 rounded-lg">
-                        Editar Conta
+                    <button id="btnEditar" class="w-full mt-4 border border-orange-500 text-orange-600 hover:bg-orange-50 transition font-semibold py-2 rounded-lg flex items-center justify-center gap-2">
+                        <span>✏️</span> Editar Conta
                     </button>
                 </div>
             </div>
 
-            <div class="mt-6 text-xs text-yellow-700 leading-relaxed space-y-3 bg-white p-4 rounded-xl border border-yellow-200">
-                <h2 class="text-sm font-bold text-yellow-800 mb-3">Informações Importantes</h2>
+            <div class="mt-6 text-xs text-orange-700 leading-relaxed space-y-3 bg-white p-4 rounded-xl border border-orange-200">
+                <h2 class="text-sm font-bold text-orange-800 mb-3 flex items-center gap-2">
+                    <span>📋</span> Informações Importantes
+                </h2>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-pulse mt-1"></div>
                     <p><strong>Dados Corretos:</strong> Certifique-se de que todos os dados estão corretos para receber seus saques.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce mt-1"></div>
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-bounce mt-1"></div>
                     <p><strong>Titularidade:</strong> A conta deve estar em seu nome para processarmos os saques.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-pulse mt-1"></div>
                     <p><strong>Segurança:</strong> Seus dados bancários são armazenados com segurança.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-spin mt-1"></div>
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-spin mt-1"></div>
                     <p><strong>Atualização:</strong> Você pode atualizar seus dados a qualquer momento.</p>
+                </div>
+                
+                <div class="mt-3 pt-3 border-t border-orange-100 text-center">
+                    <p class="text-orange-500 flex items-center justify-center gap-1">
+                        <span class="text-lg">🍊</span> Sua segurança é nossa prioridade!
+                    </p>
                 </div>
             </div>
         </section>
@@ -198,8 +235,8 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
     <!-- Menu de navegação com ícones de imagem -->
-        <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-yellow-100 rounded-t-2xl overflow-hidden">
-            <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 text-white text-xs">
+        <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-orange-100 rounded-t-2xl overflow-hidden">
+            <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white text-xs">
         
         <li>
           <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
@@ -422,7 +459,7 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    showToast('Conta bancária salva com sucesso!', 'success');
+                    showToast('Conta bancária salva com sucesso! 🍊', 'success');
                     await loadBankAccount();
                 } else {
                     showToast(data.message || 'Erro ao salvar conta bancária', 'error');

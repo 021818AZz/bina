@@ -71,6 +71,15 @@
       transition: opacity 0.3s ease;
       text-align: center;
     }
+    
+    /* Estilo para a logo se expandir corretamente */
+    .logo-banner {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 
@@ -82,7 +91,8 @@
   </div>
 
   <div class="mx-auto max-w-sm">
-    <img src="img/logo2.png" alt="Banner">
+    <!-- Logo corrigida para se expandir corretamente -->
+    <img src="img/logo2.png" alt="Banner" class="logo-banner w-full h-auto">
     
     <!-- Seção de Resumo Financeiro -->
     <div class="grid grid-cols-2 gap-2 px-4 mt-2">

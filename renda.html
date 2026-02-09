@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
-    <title>Sistema de Check-in - Futebol</title>
+    <title>Sistema de Check-in - Fazenda de Laranjas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="full-screen" content="true">
@@ -31,16 +31,16 @@
         body {
             width: 100%;
             min-height: 100vh;
-            /* FUNDO: Estádio de futebol profissional */
-            background: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            /* FUNDO: Fazenda de laranjas com árvores */
+            background: url('https://images.unsplash.com/photo-1614267861476-0d129972a7d7?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Poppins', sans-serif;
             line-height: 1.5;
-            color: white;
+            color: #3a2610;
             position: relative;
         }
 
-        /* Overlay com gradiente de futebol (verde escuro) */
+        /* Overlay com gradiente laranja */
         body::before {
             content: '';
             position: fixed;
@@ -48,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 100, 0, 0.75) 0%, rgba(0, 50, 0, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.75) 0%, rgba(255, 140, 0, 0.85) 100%);
             z-index: -1;
         }
 
@@ -59,18 +59,18 @@
             padding-top: 60px;
         }
 
-        /* ===== CABEÇALHO COM TEMA DE FUTEBOL ===== */
+        /* ===== CABEÇALHO COM TEMA DE LARANJA ===== */
         .headers {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(90deg, #1a1a1a 0%, #2d5016 50%, #1a1a1a 100%);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(90deg, #ff8c00 0%, #ffa500 50%, #ff8c00 100%);
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
             z-index: 1000;
             height: 60px;
             backdrop-filter: blur(10px);
-            border-bottom: 3px solid #ffd700;
+            border-bottom: 3px solid #8b4513;
         }
 
         .head {
@@ -90,14 +90,14 @@
             justify-content: center;
             border-radius: 50%;
             transition: all 0.2s;
-            background: rgba(255, 215, 0, 0.2);
-            border: 2px solid #ffd700;
-            color: #ffd700;
+            background: rgba(139, 69, 19, 0.2);
+            border: 2px solid #8b4513;
+            color: #8b4513;
             font-size: 1.5rem;
         }
 
         .back:hover {
-            background-color: rgba(255, 215, 0, 0.4);
+            background-color: rgba(139, 69, 19, 0.4);
             transform: scale(1.1);
         }
 
@@ -106,8 +106,8 @@
             font-size: 1.3rem;
             text-align: center;
             flex: 1;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            color: #8b4513;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
             letter-spacing: 1px;
         }
 
@@ -122,13 +122,13 @@
             text-align: center;
             margin-bottom: 30px;
             font-size: 2rem;
-            color: #ffd700;
+            color: #8b4513;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
             font-weight: 700;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
         }
 
         .page-title i {
@@ -141,54 +141,53 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* ===== ESTÁDIO PRINCIPAL (CAMPO DE FUTEBOL) ===== */
-        .stadium-container {
-            background: linear-gradient(135deg, #1a4d1a 0%, #0d3d0d 100%);
+        /* ===== FAZENDA DE LARANJAS PRINCIPAL ===== */
+        .farm-container {
+            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
             border-radius: 20px;
             padding: 0;
             margin-bottom: 30px;
             position: relative;
             overflow: hidden;
-            border: 4px solid #ffd700;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 215, 0, 0.2);
+            border: 4px solid #8b4513;
+            box-shadow: 0 20px 50px rgba(139, 69, 19, 0.8), inset 0 0 30px rgba(255, 255, 255, 0.2);
         }
 
-        .stadium-header {
-            background: linear-gradient(90deg, #1a1a1a 0%, #2d5016 100%);
+        .farm-header {
+            background: linear-gradient(90deg, #ff8c00 0%, #ffa500 100%);
             padding: 15px 20px;
             border-radius: 20px 20px 0 0;
             text-align: center;
-            border-bottom: 2px solid #ffd700;
+            border-bottom: 2px solid #8b4513;
         }
 
-        .stadium-title {
+        .farm-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #ffd700;
+            color: #8b4513;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
         }
 
-        .stadium-title i {
+        .farm-title i {
             font-size: 1.8rem;
         }
 
-        /* ===== CAMPO DE FUTEBOL REALISTA ===== */
-        .football-field {
+        /* ===== CAMPO DE LARANJAIS ===== */
+        .orange-field {
             padding: 30px 20px;
             position: relative;
             min-height: 320px;
-            /* RELVA VERDE DE FUTEBOL */
-            background: linear-gradient(180deg, #2d5016 0%, #1a4d1a 50%, #0d3d0d 100%);
+            background: linear-gradient(180deg, #228b22 0%, #32cd32 50%, #90ee90 100%);
             border-radius: 0 0 20px 20px;
             overflow: hidden;
         }
 
-        /* Padrão de relva */
-        .football-field::after {
+        /* Padrão de plantação */
+        .orange-field::after {
             content: '';
             position: absolute;
             top: 0;
@@ -201,7 +200,7 @@
             pointer-events: none;
         }
 
-        .field-markings {
+        .tree-markings {
             position: absolute;
             top: 0;
             left: 0;
@@ -211,70 +210,79 @@
             z-index: 1;
         }
 
-        /* Linha de meio-campo */
-        .field-markings::before {
+        /* Fileiras de árvores */
+        .tree-markings::before,
+        .tree-markings::after {
             content: '';
             position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: white;
-            transform: translateX(-50%);
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(139, 69, 19, 0.5);
             opacity: 0.8;
         }
 
-        /* Círculo central */
-        .field-markings::after {
-            content: '';
+        .tree-markings::before {
+            top: 33%;
+        }
+
+        .tree-markings::after {
+            top: 66%;
+        }
+
+        /* Árvores de laranja */
+        .tree {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 60px;
-            height: 60px;
-            border: 2px solid white;
+            width: 50px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .tree-trunk {
+            width: 15px;
+            height: 40px;
+            background: #8b4513;
+            border-radius: 5px;
+        }
+
+        .tree-canopy {
+            width: 40px;
+            height: 40px;
+            background: #228b22;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.8;
+            margin-top: -20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff8c00;
+            font-size: 1.5rem;
         }
 
-        /* Áreas de gol (retângulos) */
-        .goal-area-left {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            width: 50px;
-            height: 80px;
-            border: 2px solid white;
-            transform: translateY(-50%);
-            opacity: 0.6;
-        }
+        /* Posicionamento das árvores */
+        .tree:nth-child(1) { left: 15%; top: 25%; }
+        .tree:nth-child(2) { left: 50%; top: 25%; transform: translateX(-50%); }
+        .tree:nth-child(3) { right: 15%; top: 25%; }
+        .tree:nth-child(4) { left: 15%; top: 60%; }
+        .tree:nth-child(5) { left: 50%; top: 60%; transform: translateX(-50%); }
+        .tree:nth-child(6) { right: 15%; top: 60%; }
 
-        .goal-area-right {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            width: 50px;
-            height: 80px;
-            border: 2px solid white;
-            transform: translateY(-50%);
-            opacity: 0.6;
-        }
-
-        .goal {
+        .basket {
             position: absolute;
             width: 100px;
             height: 60px;
-            border: 3px solid #ffd700;
+            border: 3px solid #8b4513;
             border-radius: 8px;
             bottom: 25px;
             right: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 215, 0, 0.15);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            color: #ffd700;
+            background: rgba(139, 69, 19, 0.15);
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+            color: #8b4513;
             font-size: 2.5rem;
             z-index: 3;
         }
@@ -283,21 +291,21 @@
             position: absolute;
             width: 90px;
             height: 90px;
-            border: 3px dashed #ffd700;
+            border: 3px dashed #8b4513;
             border-radius: 50%;
             top: 25px;
             left: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 215, 0, 0.15);
-            color: #ffd700;
+            background: rgba(255, 140, 0, 0.15);
+            color: #8b4513;
             font-size: 2.5rem;
             z-index: 3;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
         }
 
-        .football-ball {
+        .orange-fruit {
             width: 75px;
             height: 75px;
             border-radius: 50%;
@@ -307,42 +315,33 @@
             position: absolute;
             cursor: pointer;
             transition: all 0.5s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.7), 0 0 20px rgba(255, 140, 0, 0.4);
             z-index: 10;
-            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f5f5f5 40%, #e0e0e0 100%);
-            border: 4px solid #333;
+            background: radial-gradient(circle at 30% 30%, #ffa500 0%, #ff8c00 40%, #ff4500 100%);
+            border: 4px solid #8b4513;
             overflow: hidden;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            background-image: url('img/novo.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
         }
 
-        /* Padrão de bola de futebol substituído por imagem */
-        .football-ball::before {
-            display: none !important;
-        }
-
-        .ball-content {
+        .orange-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            color: #333;
+            color: #fff;
             font-weight: 700;
             font-size: 11px;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.9);
             padding: 0 5px;
         }
 
-        /* NOVO: Bola girando */
-        .football-ball.spinning {
-            animation: spinBall 1s linear infinite;
+        /* NOVO: Laranja girando */
+        .orange-fruit.spinning {
+            animation: spinOrange 1s linear infinite;
         }
 
-        @keyframes spinBall {
+        @keyframes spinOrange {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
@@ -350,15 +349,15 @@
         /* NOVO: Efeito de recebimento */
         .earnings-popup {
             position: absolute;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #0d3d0d;
+            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
+            color: #8b4513;
             padding: 8px 15px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 1rem;
             z-index: 20;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.6);
-            border: 2px solid #0d3d0d;
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.6);
+            border: 2px solid #8b4513;
             animation: floatUp 1.5s ease-out forwards;
             white-space: nowrap;
         }
@@ -397,15 +396,15 @@
             100% { transform: scale(1) rotate(0deg); }
         }
 
-        /* ===== BOLA DESATIVADA ===== */
-        .ball-disabled {
+        /* ===== LARANJA DESATIVADA ===== */
+        .orange-disabled {
             cursor: not-allowed !important;
             opacity: 0.5 !important;
             filter: grayscale(0.8) !important;
         }
 
-        /* ===== ESTATÍSTICAS DO TIME ===== */
-        .team-stats {
+        /* ===== ESTATÍSTICAS DA FAZENDA ===== */
+        .farm-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
@@ -413,19 +412,19 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, rgba(0, 100, 0, 0.4) 0%, rgba(0, 50, 0, 0.6) 100%);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.4) 0%, rgba(255, 165, 0, 0.6) 100%);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
             backdrop-filter: blur(10px);
-            border: 2px solid #ffd700;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 215, 0, 0.1);
+            border: 2px solid #8b4513;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.1);
             transition: all 0.3s;
         }
 
         .stat-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 12px 35px rgba(139, 69, 19, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .stat-icon {
@@ -435,172 +434,172 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
             border-radius: 50%;
-            color: #0d3d0d;
+            color: #8b4513;
             font-size: 2rem;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
         }
 
         .stat-value {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #ffd700;
+            color: #8b4513;
             line-height: 1.2;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
         }
 
         .stat-label {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(58, 38, 16, 0.8);
             margin-top: 5px;
         }
 
-        /* ===== SEÇÕES GERAIS (JOGADORES E TÁTICAS) ===== */
-        .players-section, .tactics-section {
+        /* ===== SEÇÕES GERAIS (ÁRVORES E TAREFAS) ===== */
+        .trees-section, .tasks-section {
             margin-bottom: 30px;
-            background: linear-gradient(135deg, rgba(0, 100, 0, 0.3) 0%, rgba(0, 50, 0, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.3) 0%, rgba(255, 165, 0, 0.5) 100%);
             padding: 20px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
-            border: 2px solid #ffd700;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid #8b4513;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.5);
         }
 
         .section-header {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            color: #ffd700;
+            color: #8b4513;
         }
 
         .section-header i {
             font-size: 2rem;
             margin-right: 10px;
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6));
+            filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.6));
         }
 
         .section-header h2 {
             font-size: 1.4rem;
             font-weight: 700;
             margin: 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
         }
 
-        /* ===== GRID DE JOGADORES (PRODUTOS) ===== */
-        .players-grid {
+        /* ===== GRID DE ÁRVORES (PRODUTOS) ===== */
+        .trees-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
 
-        .player-card {
-            background: linear-gradient(135deg, rgba(0, 50, 0, 0.5) 0%, rgba(0, 30, 0, 0.7) 100%);
+        .tree-card {
+            background: linear-gradient(135deg, rgba(255, 165, 0, 0.5) 0%, rgba(255, 140, 0, 0.7) 100%);
             border-radius: 12px;
             padding: 15px;
             text-align: center;
-            border: 2px solid #ffd700;
+            border: 2px solid #8b4513;
             position: relative;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.5);
         }
 
-        .player-card:hover {
-            background: linear-gradient(135deg, rgba(0, 70, 0, 0.6) 0%, rgba(0, 40, 0, 0.8) 100%);
+        .tree-card:hover {
+            background: linear-gradient(135deg, rgba(255, 180, 0, 0.6) 0%, rgba(255, 160, 0, 0.8) 100%);
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.3);
         }
 
-        .player-icon {
+        .tree-icon {
             width: 55px;
             height: 55px;
             margin: 0 auto 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
             border-radius: 50%;
-            color: #0d3d0d;
+            color: #8b4513;
             font-size: 2rem;
             position: relative;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
         }
 
         .new-badge {
             position: absolute;
             top: -5px;
             right: -5px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            background: linear-gradient(135deg, #ff4500 0%, #ff6347 100%);
             color: white;
             font-size: 0.6rem;
             padding: 4px 8px;
             border-radius: 50%;
             font-weight: 700;
-            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.5);
+            box-shadow: 0 3px 10px rgba(255, 69, 0, 0.5);
         }
 
-        .player-name {
+        .tree-name {
             font-weight: 700;
             font-size: 1rem;
-            color: #ffd700;
+            color: #8b4513;
             margin-bottom: 3px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
         }
 
-        .player-position {
+        .tree-type {
             font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(58, 38, 16, 0.9);
             font-weight: 500;
         }
 
-        .player-value {
+        .tree-value {
             font-size: 0.9rem;
-            color: #90ee90;
+            color: #32cd32;
             margin-top: 5px;
             font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
         }
 
-        /* ===== TÁTICAS DO DIA (OPÇÕES) ===== */
-        .tactics-content {
-            color: rgba(255, 255, 255, 0.95);
+        /* ===== TAREFAS DO DIA (OPÇÕES) ===== */
+        .tasks-content {
+            color: rgba(58, 38, 16, 0.95);
         }
 
-        .tactic-item {
+        .task-item {
             display: flex;
             align-items: center;
             gap: 15px;
             padding: 15px;
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255, 140, 0, 0.1);
             border-radius: 10px;
-            border-left: 4px solid #ffd700;
+            border-left: 4px solid #8b4513;
             margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(139, 69, 19, 0.3);
         }
 
-        .tactic-icon {
+        .task-icon {
             width: 50px;
             height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
             border-radius: 50%;
-            color: #0d3d0d;
+            color: #8b4513;
             font-size: 1.6rem;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
         }
 
-        .tactic-title {
+        .task-title {
             font-weight: 700;
-            color: #ffd700;
+            color: #8b4513;
             font-size: 1.1rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
         }
 
-        .tactic-description {
+        .task-description {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(58, 38, 16, 0.9);
         }
 
         /* ===== MODAL DE NOVO CADASTRO ===== */
@@ -613,20 +612,20 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(139, 69, 19, 0.9);
             justify-content: center;
             align-items: center;
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #0d3d0d 0%, #1a4d1a 100%);
+            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
             margin: 15% auto;
             padding: 30px;
             border-radius: 20px;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.3);
-            border: 3px solid #ffd700;
+            box-shadow: 0 15px 50px rgba(139, 69, 19, 0.8), 0 0 30px rgba(255, 255, 255, 0.3);
+            border: 3px solid #8b4513;
         }
 
         .modal-icon {
@@ -636,30 +635,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
             border-radius: 50%;
-            color: #0d3d0d;
+            color: #8b4513;
             font-size: 3rem;
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
         }
 
         .modal-title {
             font-size: 1.6rem;
             font-weight: 700;
-            color: #ffd700;
+            color: #8b4513;
             margin-bottom: 15px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
         }
 
         .modal-message {
-            color: rgba(255, 255, 255, 0.95);
+            color: rgba(58, 38, 16, 0.95);
             margin-bottom: 25px;
             line-height: 1.6;
         }
 
         .modal-button {
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #0d3d0d;
+            background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
+            color: #8b4513;
             border: none;
             padding: 15px 30px;
             border-radius: 12px;
@@ -668,17 +667,18 @@
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+            border: 2px solid #8b4513;
         }
 
         .modal-button:hover {
-            background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.6);
         }
 
         /* ===== ANIMAÇÕES ===== */
-        @keyframes ballToGoal {
+        @keyframes orangeToBasket {
             0% { 
                 transform: translate(-50%, -50%) scale(1);
                 left: 50%;
@@ -694,7 +694,7 @@
             }
         }
 
-        @keyframes ballToCheckin {
+        @keyframes orangeToCheckin {
             0% { 
                 transform: translate(-50%, -50%) scale(1);
                 left: 50%;
@@ -716,8 +716,8 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(13, 61, 13, 0.95) 100%);
-            color: #ffd700;
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.95) 0%, rgba(255, 165, 0, 0.95) 100%);
+            color: #8b4513;
             padding: 15px 25px;
             border-radius: 10px;
             z-index: 10000;
@@ -726,8 +726,8 @@
             max-width: 90%;
             text-align: center;
             font-weight: 600;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.3);
-            border: 2px solid #ffd700;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.7), 0 0 20px rgba(255, 255, 255, 0.3);
+            border: 2px solid #8b4513;
         }
 
         .custom-toast.show {
@@ -749,15 +749,15 @@
                 font-size: 2.8rem;
             }
             
-            .football-field {
+            .orange-field {
                 min-height: 380px;
             }
             
-            .players-grid {
+            .trees-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            @keyframes ballToGoal {
+            @keyframes orangeToBasket {
                 0% { 
                     transform: translate(-50%, -50%) scale(1);
                     left: 50%;
@@ -773,7 +773,7 @@
                 }
             }
             
-            @keyframes ballToCheckin {
+            @keyframes orangeToCheckin {
                 0% { 
                     transform: translate(-50%, -50%) scale(1);
                     left: 50%;
@@ -795,20 +795,20 @@
                 padding: 15px 10px;
             }
             
-            .team-stats {
+            .farm-stats {
                 grid-template-columns: 1fr;
             }
             
-            .players-grid {
+            .trees-grid {
                 grid-template-columns: 1fr;
             }
             
-            .football-field {
+            .orange-field {
                 min-height: 280px;
                 padding: 20px 15px;
             }
 
-            .football-ball {
+            .orange-fruit {
                 width: 60px;
                 height: 60px;
             }
@@ -825,13 +825,13 @@
 </head>
 <body>
     <div class="page">
-        <!-- CABEÇALHO FIXO COM TEMA DE FUTEBOL -->
+        <!-- CABEÇALHO FIXO COM TEMA DE LARANJA -->
         <header class="headers">
             <div class="head">
                 <button class="back" onclick="window.history.back()">
                     <i class='bx bx-arrow-back'></i>
                 </button>
-                <h1 class="name">⚽ TAREFAS DO DIA ⚽</h1>
+                <h1 class="name">🍊 TAREFAS DO DIA 🍊</h1>
                 <div style="width: 40px;"></div>
             </div>
         </header>
@@ -839,12 +839,12 @@
         <!-- CONTEÚDO PRINCIPAL -->
         <main class="content-container">
             <div class="page-title">
-                <i class='bx bx-football'></i>
+                <i class='bx bx-lemon'></i>
                 Minhas Tarefas Diárias
             </div>
             
-            <!-- ESTATÍSTICAS DO TIME -->
-            <section class="team-stats">
+            <!-- ESTATÍSTICAS DA FAZENDA -->
+            <section class="farm-stats">
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class='bx bx-list-check'></i>
@@ -861,51 +861,76 @@
                 </div>
             </section>
             
-            <!-- ESTÁDIO PRINCIPAL - CAMPO DE FUTEBOL -->
-            <section class="stadium-container">
-                <div class="stadium-header">
-                    <div class="stadium-title">
-                        <i class='bx bx-football'></i>
-                        Campo Principal
+            <!-- FAZENDA PRINCIPAL - LARANJAL -->
+            <section class="farm-container">
+                <div class="farm-header">
+                    <div class="farm-title">
+                        <i class='bx bx-lemon'></i>
+                        Laranjal Principal
                     </div>
                 </div>
                 
-                <div class="football-field" id="footballField">
-                    <div class="field-markings"></div>
-                    <div class="goal-area-left"></div>
-                    <div class="goal-area-right"></div>
-                    <div class="goal">
-                        <i class='bx bxs-flag-checkered'></i>
+                <div class="orange-field" id="orangeField">
+                    <div class="tree-markings"></div>
+                    
+                    <!-- Árvores de laranja -->
+                    <div class="tree">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-canopy">🍊</div>
+                    </div>
+                    <div class="tree">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-canopy">🍊</div>
+                    </div>
+                    <div class="tree">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-canopy">🍊</div>
+                    </div>
+                    <div class="tree">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-canopy">🍊</div>
+                    </div>
+                    <div class="tree">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-canopy">🍊</div>
+                    </div>
+                    <div class="tree">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-canopy">🍊</div>
+                    </div>
+                    
+                    <div class="basket">
+                        <i class='bx bx-basket'></i>
                     </div>
                     <div class="checkin-area">
-                        <i class='bx bx-target-lock'></i>
+                        <i class='bx bx-water'></i>
                     </div>
-                    <div class="football-ball" id="footballBall" onclick="handleBallClick()">
-                        <div class="ball-content">Clique para Jogar</div>
+                    <div class="orange-fruit" id="orangeFruit" onclick="handleOrangeClick()">
+                        <div class="orange-content">Clique para Colher</div>
                     </div>
                     <i class='bx bxs-trophy trophy' id="trophy"></i>
                 </div>
             </section>
             
-            <!-- MEUS JOGADORES (PRODUTOS) -->
-            <section class="players-section">
+            <!-- MINHAS ÁRVORES (PRODUTOS) -->
+            <section class="trees-section">
                 <div class="section-header">
-                    <i class='bx bx-group'></i>
-                    <h2>Meus Jogadores</h2>
+                    <i class='bx bx-tree'></i>
+                    <h2>Minhas Árvores</h2>
                 </div>
                 
-                <div class="players-grid" id="playersGrid">
+                <div class="trees-grid" id="treesGrid">
                     <!-- Os produtos serão carregados aqui -->
                 </div>
             </section>
             
-            <!-- TÁTICA DO DIA (OPÇÕES) -->
-            <section class="tactics-section">
+            <!-- TAREFAS DO DIA (OPÇÕES) -->
+            <section class="tasks-section">
                 <div class="section-header">
                     <i class='bx bx-bulb'></i>
-                    <h2>Tática do Dia</h2>
+                    <h2>Tarefas do Dia</h2>
                 </div>
-                <div class="tactics-content" id="tacticsContent">
+                <div class="tasks-content" id="tasksContent">
                     <!-- Conteúdo será carregado aqui -->
                 </div>
             </section>
@@ -918,7 +943,7 @@
             <div class="modal-icon">
                 <i class='bx bx-user-plus'></i>
             </div>
-            <h2 class="modal-title">🎉 Bem-vindo ao Time! ⚽</h2>
+            <h2 class="modal-title">🎉 Bem-vindo à Fazenda! 🍊</h2>
             <p class="modal-message" id="newRegistrationMessage">
                 <!-- Mensagem será preenchida dinamicamente -->
             </p>
@@ -932,7 +957,7 @@
             <div class="modal-icon">
                 <i class='bx bx-cart-alt'></i>
             </div>
-            <h2 class="modal-title">⚽ Compra Realizada Hoje ⚽</h2>
+            <h2 class="modal-title">🍊 Compra Realizada Hoje 🍊</h2>
             <p class="modal-message" id="recentPurchaseMessage">
                 <!-- Mensagem será preenchida dinamicamente -->
             </p>
@@ -985,7 +1010,7 @@
                 message += `<br>`;
             }
             
-            message += 'Suas tarefas diárias ficarão disponíveis a partir de amanhã. Aproveite para explorar o app!';
+            message += 'Suas tarefas diárias ficarão disponíveis a partir de amanhã. Aproveite para explorar a fazenda!';
             
             messageElement.innerHTML = message;
             modal.style.display = 'flex';
@@ -1005,14 +1030,14 @@
             let message = '';
             
             if (taskState.todaysPurchases.length > 0) {
-                message += `<strong>Você comprou os seguintes produtos hoje:</strong><br>`;
+                message += `<strong>Você plantou as seguintes árvores hoje:</strong><br>`;
                 taskState.todaysPurchases.forEach(purchase => {
                     message += `• ${purchase.product_name} - ${purchase.daily_return} KZ/dia<br>`;
                 });
                 message += `<br>`;
             }
             
-            message += 'As tarefas ficarão disponíveis a partir de amanhã. Descanse e prepare-se para começar a ganhar recompensas!';
+            message += 'As tarefas ficarão disponíveis a partir de amanhã. As árvores precisam de tempo para crescer!';
             
             messageElement.innerHTML = message;
             modal.style.display = 'flex';
@@ -1112,10 +1137,10 @@
             for (let purchase of purchases) {
                 if (purchase.purchase_date) {
                     const purchaseDate = new Date(purchase.purchase_date);
-                    console.log('📦 Compra:', purchase.product_name, '- Data:', purchaseDate.toISOString());
+                    console.log('🌳 Árvore:', purchase.product_name, '- Data:', purchaseDate.toISOString());
                     
                     if (purchaseDate >= todayStart && purchaseDate < todayEnd) {
-                        console.log('✅ COMPRA HOJE ENCONTRADA:', purchase.product_name);
+                        console.log('✅ PLANTIO HOJE ENCONTRADO:', purchase.product_name);
                         todaysPurchases.push(purchase);
                     }
                 }
@@ -1133,7 +1158,7 @@
             popup.style.left = position.x + 'px';
             popup.style.top = position.y + 'px';
             
-            document.getElementById('footballField').appendChild(popup);
+            document.getElementById('orangeField').appendChild(popup);
             
             // Remover popup após animação
             setTimeout(() => {
@@ -1141,14 +1166,14 @@
             }, 1500);
         }
 
-        // Função para manipular clique na bola - AGORA COM ANIMAÇÕES MELHORADAS
-        function handleBallClick() {
-            console.log('⚽ Clique na bola - Estado:', {
+        // Função para manipular clique na laranja
+        function handleOrangeClick() {
+            console.log('🍊 Clique na laranja - Estado:', {
                 isNewRegistration: taskState.isNewRegistration,
                 hasRecentPurchase: taskState.hasRecentPurchase
             });
             
-            // VERIFICAÇÃO PRINCIPAL: Se o usuário se cadastrou hoje ou fez compra hoje, BLOQUEAR TUDO
+            // VERIFICAÇÃO PRINCIPAL: Se o usuário se cadastrou hoje ou plantou hoje, BLOQUEAR TUDO
             if (taskState.isNewRegistration) {
                 showNewRegistrationModal();
                 return;
@@ -1159,24 +1184,24 @@
                 return;
             }
 
-            const ball = document.getElementById('footballBall');
+            const orange = document.getElementById('orangeFruit');
             const trophy = document.getElementById('trophy');
-            const field = document.getElementById('footballField');
+            const field = document.getElementById('orangeField');
             
-            // Desativar a bola durante a animação
-            ball.style.pointerEvents = 'none';
+            // Desativar a laranja durante a animação
+            orange.style.pointerEvents = 'none';
 
             if (!taskState.checkinCompleted) {
-                // ANIMAÇÃO: Bola girando + indo para check-in
-                ball.classList.add('spinning');
+                // ANIMAÇÃO: Laranja girando + indo para rega
+                orange.classList.add('spinning');
                 
                 setTimeout(() => {
                     // Parar de girar e ir para o local
-                    ball.classList.remove('spinning');
-                    ball.style.animation = 'ballToCheckin 1s forwards';
+                    orange.classList.remove('spinning');
+                    orange.style.animation = 'orangeToCheckin 1s forwards';
                     
                     setTimeout(() => {
-                        // Processar check-in
+                        // Processar rega
                         performDailyCheckin().then((earnings) => {
                             if (earnings > 0) {
                                 // Mostrar popup de ganhos
@@ -1190,34 +1215,34 @@
                                 });
                             }
                             
-                            // Resetar bola
+                            // Resetar laranja
                             setTimeout(() => {
-                                ball.style.animation = '';
-                                ball.style.left = '50%';
-                                ball.style.top = '50%';
-                                ball.style.transform = 'translate(-50%, -50%)';
-                                ball.style.pointerEvents = 'auto';
+                                orange.style.animation = '';
+                                orange.style.left = '50%';
+                                orange.style.top = '50%';
+                                orange.style.transform = 'translate(-50%, -50%)';
+                                orange.style.pointerEvents = 'auto';
                             }, 1000);
                         });
                     }, 1000);
                 }, 1500); // Tempo girando
             } 
             else if (!taskState.incomeCompleted && taskState.hasActivePurchases) {
-                // ANIMAÇÃO: Bola girando + indo para o gol
-                ball.classList.add('spinning');
+                // ANIMAÇÃO: Laranja girando + indo para a cesta
+                orange.classList.add('spinning');
                 
                 setTimeout(() => {
-                    // Parar de girar e ir para o gol
-                    ball.classList.remove('spinning');
-                    ball.style.animation = 'ballToGoal 1.5s forwards';
+                    // Parar de girar e ir para a cesta
+                    orange.classList.remove('spinning');
+                    orange.style.animation = 'orangeToBasket 1.5s forwards';
                     
                     setTimeout(() => {
-                        // Processar coleta
+                        // Processar colheita
                         collectProductIncome().then((earnings) => {
                             if (earnings > 0) {
                                 // Mostrar popup de ganhos
-                                const goal = document.querySelector('.goal');
-                                const rect = goal.getBoundingClientRect();
+                                const basket = document.querySelector('.basket');
+                                const rect = basket.getBoundingClientRect();
                                 const fieldRect = field.getBoundingClientRect();
                                 
                                 showEarningsPopup(earnings, {
@@ -1229,14 +1254,14 @@
                                 trophy.classList.add('show');
                             }
                             
-                            // Resetar bola e troféu
+                            // Resetar laranja e troféu
                             setTimeout(() => {
                                 trophy.classList.remove('show');
-                                ball.style.animation = '';
-                                ball.style.left = '50%';
-                                ball.style.top = '50%';
-                                ball.style.transform = 'translate(-50%, -50%)';
-                                ball.style.pointerEvents = 'auto';
+                                orange.style.animation = '';
+                                orange.style.left = '50%';
+                                orange.style.top = '50%';
+                                orange.style.transform = 'translate(-50%, -50%)';
+                                orange.style.pointerEvents = 'auto';
                             }, 2000);
                         });
                     }, 1500);
@@ -1244,11 +1269,11 @@
             } 
             else if (taskState.checkinCompleted && taskState.incomeCompleted) {
                 showToast('🎉 Todas as tarefas concluídas hoje!');
-                ball.style.pointerEvents = 'auto';
+                orange.style.pointerEvents = 'auto';
             }
             else {
-                showToast('⚠️ Nenhuma jogada disponível');
-                ball.style.pointerEvents = 'auto';
+                showToast('⚠️ Nenhuma colheita disponível');
+                orange.style.pointerEvents = 'auto';
             }
         }
 
@@ -1303,26 +1328,26 @@
             }
         }
 
-        // Atualizar UI para novo cadastro - AGORA MOSTRA PRODUTOS
+        // Atualizar UI para novo cadastro
         function updateUIForNewRegistration(data) {
-            const ball = document.getElementById('footballBall');
-            const tacticsContent = document.getElementById('tacticsContent');
-            const playersGrid = document.getElementById('playersGrid');
+            const orange = document.getElementById('orangeFruit');
+            const tasksContent = document.getElementById('tasksContent');
+            const treesGrid = document.getElementById('treesGrid');
             
-            // Desativar completamente a bola
-            ball.style.cursor = 'not-allowed';
-            ball.style.opacity = '0.6';
-            ball.classList.add('ball-disabled');
-            ball.onclick = () => showNewRegistrationModal();
+            // Desativar completamente a laranja
+            orange.style.cursor = 'not-allowed';
+            orange.style.opacity = '0.6';
+            orange.classList.add('orange-disabled');
+            orange.onclick = () => showNewRegistrationModal();
             
             // Atualizar estatísticas para zero
             document.getElementById('completedTasks').textContent = '0/2';
             document.getElementById('todayEarnings').textContent = '0 KZ';
             
-            // SEMPRE MOSTRAR PRODUTOS - MESMO SE CADASTROU HOJE
+            // SEMPRE MOSTRAR ÁRVORES - MESMO SE CADASTROU HOJE
             if (data.active_purchases && data.active_purchases.length > 0) {
-                const positions = ["Atacante", "Meio-Campo", "Zagueiro", "Goleiro", "Lateral"];
-                playersGrid.innerHTML = data.active_purchases.map((purchase, index) => {
+                const treeTypes = ["Laranja Bahia", "Laranja Lima", "Laranja Pera", "Laranja Valencia", "Laranja Natal"];
+                treesGrid.innerHTML = data.active_purchases.map((purchase, index) => {
                     const purchaseDate = new Date(purchase.purchase_date);
                     const today = new Date();
                     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -1330,72 +1355,72 @@
                     const isToday = purchaseDate >= todayStart && purchaseDate < todayEnd;
                     
                     return `
-                        <div class="player-card">
-                            <div class="player-icon">
-                                <i class='bx bx-user-pin'></i>
+                        <div class="tree-card">
+                            <div class="tree-icon">
+                                <i class='bx bx-tree'></i>
                                 ${isToday ? '<div class="new-badge">NOVO</div>' : ''}
                             </div>
-                            <div class="player-name">${purchase.product_name}</div>
-                            <div class="player-position">${positions[index % positions.length]}</div>
-                            <div class="player-value">+${purchase.daily_return} KZ/dia</div>
-                            ${isToday ? '<div style="color: #ffd700; font-size: 0.8rem; margin-top: 5px;">🆕 Comprado hoje</div>' : ''}
+                            <div class="tree-name">${purchase.product_name}</div>
+                            <div class="tree-type">${treeTypes[index % treeTypes.length]}</div>
+                            <div class="tree-value">+${purchase.daily_return} KZ/dia</div>
+                            ${isToday ? '<div style="color: #8b4513; font-size: 0.8rem; margin-top: 5px;">🆕 Plantada hoje</div>' : ''}
                         </div>
                     `;
                 }).join('');
             } else {
-                playersGrid.innerHTML = `
-                    <div class="player-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
-                        <div class="player-icon" style="margin: 0 auto 15px;">
-                            <i class='bx bx-user-plus'></i>
+                treesGrid.innerHTML = `
+                    <div class="tree-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
+                        <div class="tree-icon" style="margin: 0 auto 15px;">
+                            <i class='bx bx-tree'></i>
                         </div>
-                        <div class="player-name">Bem-vindo Jogador!</div>
-                        <div class="player-position">Suas contratações aparecerão aqui</div>
+                        <div class="tree-name">Bem-vindo Fazendeiro!</div>
+                        <div class="tree-type">Suas árvores aparecerão aqui</div>
                     </div>
                 `;
             }
             
             // Conteúdo para novo cadastro
-            let tacticsHTML = `
+            let tasksHTML = `
                 <div style="text-align: center; padding: 20px;">
-                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🎉⚽🎊</div>
-                    <div style="font-size: 1.3rem; font-weight: 600; color: #ffd700; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Bem-vindo ao Time!</div>
-                    <div style="color: rgba(255, 255, 255, 0.9); margin-bottom: 15px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🎉🍊🎊</div>
+                    <div style="font-size: 1.3rem; font-weight: 600; color: #8b4513; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(255,255,255,0.8);">Bem-vindo à Fazenda!</div>
+                    <div style="color: rgba(58, 38, 16, 0.9); margin-bottom: 15px;">
                         Parabéns pelo seu cadastro hoje! 🎊
                     </div>
             `;
             
             if (taskState.todaysPurchases.length > 0) {
-                tacticsHTML += `
-                    <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #ffd700; margin-bottom: 15px;">
-                        <div style="color: #ffd700; font-weight: 600; margin-bottom: 8px;">📦 Seus Produtos de Hoje:</div>
-                        <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; text-align: left;">
+                tasksHTML += `
+                    <div style="background: rgba(255, 140, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #8b4513; margin-bottom: 15px;">
+                        <div style="color: #8b4513; font-weight: 600; margin-bottom: 8px;">🌳 Suas Árvores de Hoje:</div>
+                        <div style="color: rgba(58, 38, 16, 0.8); font-size: 0.9rem; text-align: left;">
                 `;
                 
                 taskState.todaysPurchases.forEach(purchase => {
-                    tacticsHTML += `<div>• ${purchase.product_name} - ${purchase.daily_return} KZ/dia</div>`;
+                    tasksHTML += `<div>• ${purchase.product_name} - ${purchase.daily_return} KZ/dia</div>`;
                 });
                 
-                tacticsHTML += `
+                tasksHTML += `
                         </div>
                     </div>
                 `;
             }
             
-            tacticsHTML += `
-                    <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #ffd700;">
-                        <div style="color: #ffd700; font-weight: 600; margin-bottom: 8px;">📅 Tarefas Disponíveis Amanhã</div>
-                        <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+            tasksHTML += `
+                    <div style="background: rgba(255, 140, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #8b4513;">
+                        <div style="color: #8b4513; font-weight: 600; margin-bottom: 8px;">📅 Tarefas Disponíveis Amanhã</div>
+                        <div style="color: rgba(58, 38, 16, 0.8); font-size: 0.9rem;">
                             Suas tarefas diárias ficarão disponíveis a partir de amanhã. 
-                            Aproveite para explorar o app e conhecer as funcionalidades!
+                            Aproveite para explorar a fazenda e conhecer as funcionalidades!
                         </div>
                     </div>
-                    <div style="margin-top: 15px; color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">
+                    <div style="margin-top: 15px; color: rgba(58, 38, 16, 0.7); font-size: 0.85rem;">
                         <strong>⚠️ Só poderás realizar tarefas amanhã!</strong>
                     </div>
                 </div>
             `;
             
-            tacticsContent.innerHTML = tacticsHTML;
+            tasksContent.innerHTML = tasksHTML;
             
             // Mostrar modal automaticamente
             setTimeout(() => {
@@ -1416,13 +1441,13 @@
                 },
                 active_purchases: [
                     { 
-                        product_name: "Atacante Estrela", 
+                        product_name: "Pé de Laranja Bahia", 
                         daily_return: 50, 
                         total_earned: 250, 
                         purchase_date: yesterday.toISOString()
                     },
                     { 
-                        product_name: "Meio-Campo Premium", 
+                        product_name: "Pé de Laranja Lima", 
                         daily_return: 100, 
                         total_earned: 500, 
                         purchase_date: yesterday.toISOString()
@@ -1449,9 +1474,9 @@
             taskState.hasActivePurchases = data.has_active_purchases || false;
             taskState.todayEarnings = 0;
             
-            // Verificar compras recentes
-            console.log('🔍 Verificando compras recentes...');
-            console.log('📦 Compras ativas:', data.active_purchases || []);
+            // Verificar plantios recentes
+            console.log('🔍 Verificando plantios recentes...');
+            console.log('🌳 Árvores ativas:', data.active_purchases || []);
             
             taskState.hasRecentPurchase = checkRecentPurchases(data.active_purchases || []);
             
@@ -1470,11 +1495,11 @@
 
             updateStats();
 
-            // Atualizar jogadores (produtos) - SEMPRE MOSTRAR PRODUTOS
-            const playersGrid = document.getElementById('playersGrid');
+            // Atualizar árvores (produtos) - SEMPRE MOSTRAR ÁRVORES
+            const treesGrid = document.getElementById('treesGrid');
             if (data.active_purchases && data.active_purchases.length > 0) {
-                const positions = ["Atacante", "Meio-Campo", "Zagueiro", "Goleiro", "Lateral"];
-                playersGrid.innerHTML = data.active_purchases.map((purchase, index) => {
+                const treeTypes = ["Laranja Bahia", "Laranja Lima", "Laranja Pera", "Laranja Valencia", "Laranja Natal"];
+                treesGrid.innerHTML = data.active_purchases.map((purchase, index) => {
                     const purchaseDate = new Date(purchase.purchase_date);
                     const today = new Date();
                     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -1482,139 +1507,139 @@
                     const isToday = purchaseDate >= todayStart && purchaseDate < todayEnd;
                     
                     return `
-                        <div class="player-card">
-                            <div class="player-icon">
-                                <i class='bx bx-user-pin'></i>
+                        <div class="tree-card">
+                            <div class="tree-icon">
+                                <i class='bx bx-tree'></i>
                                 ${isToday ? '<div class="new-badge">NOVO</div>' : ''}
                             </div>
-                            <div class="player-name">${purchase.product_name}</div>
-                            <div class="player-position">${positions[index % positions.length]}</div>
-                            <div class="player-value">+${purchase.daily_return} KZ/dia</div>
-                            ${isToday ? '<div style="color: #ffd700; font-size: 0.8rem; margin-top: 5px;">🆕 Comprado hoje</div>' : ''}
+                            <div class="tree-name">${purchase.product_name}</div>
+                            <div class="tree-type">${treeTypes[index % treeTypes.length]}</div>
+                            <div class="tree-value">+${purchase.daily_return} KZ/dia</div>
+                            ${isToday ? '<div style="color: #8b4513; font-size: 0.8rem; margin-top: 5px;">🆕 Plantada hoje</div>' : ''}
                         </div>
                     `;
                 }).join('');
             } else {
-                playersGrid.innerHTML = `
-                    <div class="player-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
-                        <div class="player-icon" style="margin: 0 auto 15px;">
-                            <i class='bx bx-user-x'></i>
+                treesGrid.innerHTML = `
+                    <div class="tree-card" style="grid-column: 1 / -1; text-align: center; padding: 30px;">
+                        <div class="tree-icon" style="margin: 0 auto 15px;">
+                            <i class='bx bx-tree'></i>
                         </div>
-                        <div class="player-name">Time Vazio</div>
-                        <div class="player-position">Contrate jogadores para começar</div>
+                        <div class="tree-name">Fazenda Vazia</div>
+                        <div class="tree-type">Plante árvores para começar</div>
                     </div>
                 `;
             }
 
-            // Atualizar tática (opções)
-            const tacticsContent = document.getElementById('tacticsContent');
-            const ball = document.getElementById('footballBall');
+            // Atualizar tarefas (opções)
+            const tasksContent = document.getElementById('tasksContent');
+            const orange = document.getElementById('orangeFruit');
 
-            let tacticsHTML = '';
+            let tasksHTML = '';
 
-            // SE O USUÁRIO FEZ COMPRA HOJE → BLOQUEAR TAREFAS
+            // SE O USUÁRIO PLANTOU HOJE → BLOQUEAR TAREFAS
             if (taskState.hasRecentPurchase) {
-                tacticsHTML = `
+                tasksHTML = `
                     <div style="text-align: center; padding: 20px;">
-                        <div style="font-size: 2.5rem; margin-bottom: 15px;">⚽🛒⚽</div>
-                        <div style="font-size: 1.3rem; font-weight: 600; color: #ffd700; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Você Comprou Hoje!</div>
+                        <div style="font-size: 2.5rem; margin-bottom: 15px;">🍊🌳🍊</div>
+                        <div style="font-size: 1.3rem; font-weight: 600; color: #8b4513; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(255,255,255,0.8);">Você Plantou Hoje!</div>
                 `;
                 
                 if (taskState.todaysPurchases.length > 0) {
-                    tacticsHTML += `
-                        <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #ffd700; margin-bottom: 15px;">
-                            <div style="color: #ffd700; font-weight: 600; margin-bottom: 8px;">📦 Seus Produtos de Hoje:</div>
-                            <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; text-align: left;">
+                    tasksHTML += `
+                        <div style="background: rgba(255, 140, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #8b4513; margin-bottom: 15px;">
+                            <div style="color: #8b4513; font-weight: 600; margin-bottom: 8px;">🌳 Suas Árvores de Hoje:</div>
+                            <div style="color: rgba(58, 38, 16, 0.8); font-size: 0.9rem; text-align: left;">
                     `;
                     
                     taskState.todaysPurchases.forEach(purchase => {
-                        tacticsHTML += `<div>• ${purchase.product_name} - ${purchase.daily_return} KZ/dia</div>`;
+                        tasksHTML += `<div>• ${purchase.product_name} - ${purchase.daily_return} KZ/dia</div>`;
                     });
                     
-                    tacticsHTML += `
+                    tasksHTML += `
                             </div>
                         </div>
                     `;
                 }
                 
-                tacticsHTML += `
-                        <div style="color: rgba(255, 255, 255, 0.9); margin-bottom: 15px;">
-                            Parabéns pela sua nova aquisição! 🎉
+                tasksHTML += `
+                        <div style="color: rgba(58, 38, 16, 0.9); margin-bottom: 15px;">
+                            Parabéns pelo seu novo plantio! 🎉
                         </div>
-                        <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #ffd700;">
-                            <div style="color: #ffd700; font-weight: 600; margin-bottom: 8px;">📅 Tarefas Disponíveis Amanhã</div>
-                            <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
-                                Suas tarefas diárias ficarão disponíveis a partir de amanhã. Descanse e prepare-se para começar a ganhar recompensas!
+                        <div style="background: rgba(255, 140, 0, 0.1); padding: 15px; border-radius: 10px; border: 2px solid #8b4513;">
+                            <div style="color: #8b4513; font-weight: 600; margin-bottom: 8px;">📅 Tarefas Disponíveis Amanhã</div>
+                            <div style="color: rgba(58, 38, 16, 0.8); font-size: 0.9rem;">
+                                Suas tarefas diárias ficarão disponíveis a partir de amanhã. As árvores precisam de tempo para crescer e dar frutos!
                             </div>
                         </div>
-                        <div style="margin-top: 15px; color: rgba(255, 255, 255, 0.7); font-size: 0.85rem;">
+                        <div style="margin-top: 15px; color: rgba(58, 38, 16, 0.7); font-size: 0.85rem;">
                             <strong>⚠️ Só poderás realizar tarefas amanhã!</strong>
                         </div>
                     </div>
                 `;
                 
-                // Desativar a bola completamente
-                ball.style.cursor = 'not-allowed';
-                ball.style.opacity = '0.6';
-                ball.classList.add('ball-disabled');
-                ball.onclick = () => showRecentPurchaseModal();
+                // Desativar a laranja completamente
+                orange.style.cursor = 'not-allowed';
+                orange.style.opacity = '0.6';
+                orange.classList.add('orange-disabled');
+                orange.onclick = () => showRecentPurchaseModal();
                 
             }
             else if (!taskState.checkinCompleted || !taskState.incomeCompleted) {
-                tacticsHTML = `
+                tasksHTML = `
                     <div style="display: flex; flex-direction: column; gap: 15px;">
-                        <h3 style="color: #ffd700; font-size: 1.1rem; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Instruções do Treinador:</h3>
+                        <h3 style="color: #8b4513; font-size: 1.1rem; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(255,255,255,0.8);">Instruções do Fazendeiro:</h3>
                         
                         ${!taskState.checkinCompleted ? `
-                            <div class="tactic-item">
-                                <div class="tactic-icon">
-                                    <i class='bx bx-target-lock'></i>
+                            <div class="task-item">
+                                <div class="task-icon">
+                                    <i class='bx bx-water'></i>
                                 </div>
                                 <div style="flex: 1;">
-                                    <div class="tactic-title">Aquecimento Diário</div>
-                                    <div class="tactic-description">Mova a bola para a área de aquecimento para ganhar 50 KZ</div>
+                                    <div class="task-title">Rega Diária</div>
+                                    <div class="task-description">Regue as árvores para ganhar 50 KZ</div>
                                 </div>
                             </div>
                         ` : ''}
                         
                         ${taskState.hasActivePurchases && !taskState.incomeCompleted ? `
-                            <div class="tactic-item">
-                                <div class="tactic-icon">
-                                    <i class='bx bx-money'></i>
+                            <div class="task-item">
+                                <div class="task-icon">
+                                    <i class='bx bx-basket'></i>
                                 </div>
                                 <div style="flex: 1;">
-                                    <div class="tactic-title">Finalização no Gol</div>
-                                    <div class="tactic-description">Chute a bola no gol para coletar +${data.tasks_status?.product_income?.reward || 0} KZ</div>
+                                    <div class="task-title">Colheita de Laranjas</div>
+                                    <div class="task-description">Colha as laranjas para coletar +${data.tasks_status?.product_income?.reward || 0} KZ</div>
                                 </div>
                             </div>
                         ` : ''}
                     </div>
                 `;
                 
-                // Reativar a bola
-                ball.style.cursor = 'pointer';
-                ball.style.opacity = '1';
-                ball.classList.remove('ball-disabled');
-                ball.onclick = handleBallClick;
+                // Reativar a laranja
+                orange.style.cursor = 'pointer';
+                orange.style.opacity = '1';
+                orange.classList.remove('orange-disabled');
+                orange.onclick = handleOrangeClick;
             } else {
-                tacticsHTML = `
+                tasksHTML = `
                     <div style="text-align: center; padding: 30px 20px;">
-                        <div style="font-size: 3rem; margin-bottom: 15px;">🏆⚽🏆</div>
-                        <div style="font-size: 1.3rem; font-weight: 600; color: #ffd700; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">Vitória do Dia!</div>
-                        <div style="color: rgba(255, 255, 255, 0.9);">Você completou todas as jogadas de hoje!</div>
-                        <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; margin-top: 5px;">Volte amanhã para mais partidas.</div>
+                        <div style="font-size: 3rem; margin-bottom: 15px;">🏆🍊🏆</div>
+                        <div style="font-size: 1.3rem; font-weight: 600; color: #8b4513; margin-bottom: 10px; text-shadow: 1px 1px 3px rgba(255,255,255,0.8);">Colheita Completa!</div>
+                        <div style="color: rgba(58, 38, 16, 0.9);">Você completou todas as tarefas de hoje!</div>
+                        <div style="color: rgba(58, 38, 16, 0.8); font-size: 0.9rem; margin-top: 5px;">Volte amanhã para mais colheitas.</div>
                     </div>
                 `;
                 
-                // Desativar a bola quando tudo estiver completo
-                ball.style.cursor = 'not-allowed';
-                ball.style.opacity = '0.6';
-                ball.classList.add('ball-disabled');
+                // Desativar a laranja quando tudo estiver completo
+                orange.style.cursor = 'not-allowed';
+                orange.style.opacity = '0.6';
+                orange.classList.add('orange-disabled');
             }
 
-            tacticsContent.innerHTML = tacticsHTML;
+            tasksContent.innerHTML = tasksHTML;
 
-            // Se houver compra recente, mostrar o modal automaticamente
+            // Se houver plantio recente, mostrar o modal automaticamente
             if (taskState.hasRecentPurchase) {
                 setTimeout(() => {
                     showRecentPurchaseModal();
@@ -1622,7 +1647,7 @@
             }
         }
 
-        // MODIFICADA: Função para fazer check-in - AGORA RETORNA PROMISE
+        // MODIFICADA: Função para fazer check-in (rega) - AGORA RETORNA PROMISE
         async function performDailyCheckin() {
             return new Promise(async (resolve) => {
                 // Verificar bloqueios
@@ -1663,17 +1688,17 @@
                         setTimeout(loadTasksStatus, 1000);
                         resolve(earnings);
                     } else {
-                        throw new Error(data.message || 'Erro no check-in');
+                        throw new Error(data.message || 'Erro na rega');
                     }
                 } catch (error) {
-                    console.error('Erro no check-in:', error);
-                    showToast('❌ Falha no aquecimento');
+                    console.error('Erro na rega:', error);
+                    showToast('❌ Falha na rega das árvores');
                     resolve(0);
                 }
             });
         }
 
-        // MODIFICADA: Função para coletar rendimentos - AGORA RETORNA PROMISE
+        // MODIFICADA: Função para coletar rendimentos (colheita) - AGORA RETORNA PROMISE
         async function collectProductIncome() {
             return new Promise(async (resolve) => {
                 // Verificar bloqueios
@@ -1714,11 +1739,11 @@
                         setTimeout(loadTasksStatus, 1000);
                         resolve(earnings);
                     } else {
-                        throw new Error(data.message || 'Erro na coleta de rendimentos');
+                        throw new Error(data.message || 'Erro na colheita');
                     }
                 } catch (error) {
-                    console.error('Erro na coleta:', error);
-                    showToast('❌ Falha na finalização');
+                    console.error('Erro na colheita:', error);
+                    showToast('❌ Falha na colheita');
                     resolve(0);
                 }
             });
@@ -1726,7 +1751,7 @@
 
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Inicializando sistema de tarefas...');
+            console.log('🚀 Inicializando fazenda de laranjas...');
             loadTasksStatus();
             // Atualizar a cada 30 segundos
             setInterval(loadTasksStatus, 30000);

@@ -66,8 +66,8 @@
             background: #555;
         }
 
-        /* Estilos para as bolas de futebol */
-        .football-ball {
+        /* Estilos para as bolas de bina/construção civil */
+        .construction-ball {
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -79,41 +79,25 @@
             transition: all 0.5s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 10;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-            border: 3px solid #15803d;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border: 3px solid #854d0e;
             overflow: hidden;
         }
 
-        .football-ball::before {
+        .construction-ball::before {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
-            background: 
-                /* Linhas pretas do futebol */
-                linear-gradient(to right, #000 0%, #000 5%, transparent 5%, transparent 95%, #000 95%, #000 100%),
-                linear-gradient(to bottom, #000 0%, #000 5%, transparent 5%, transparent 95%, #000 95%, #000 100%),
-                /* Pentágonos pretos */
-                radial-gradient(circle at 30% 30%, #000 0%, #000 10%, transparent 10%),
-                radial-gradient(circle at 70% 30%, #000 0%, #000 10%, transparent 10%),
-                radial-gradient(circle at 50% 70%, #000 0%, #000 10%, transparent 10%),
-                radial-gradient(circle at 20% 50%, #000 0%, #000 10%, transparent 10%),
-                radial-gradient(circle at 80% 50%, #000 0%, #000 10%, transparent 10%);
-            background-size: 
-                100% 100%,
-                100% 100%,
-                100% 100%,
-                100% 100%,
-                100% 100%,
-                100% 100%,
-                100% 100%;
-            background-repeat: no-repeat;
-            opacity: 0.7;
+            background-image: url('img/novo.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.9;
         }
 
-        .football-ball.selected {
-            border: 3px solid #fbbf24;
-            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.5);
+        .construction-ball.selected {
+            border: 3px solid #dc2626;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.5);
             transform: scale(1.1);
         }
 
@@ -121,14 +105,16 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            color: #15803d;
+            color: white;
             font-weight: bold;
             font-size: 12px;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
             padding: 0 5px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
         }
 
-        .football-container {
+        .construction-container {
             position: relative;
             width: 100%;
             height: 300px;
@@ -136,6 +122,9 @@
             align-items: center;
             justify-content: center;
             margin: 20px 0;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 12px;
+            border: 2px solid #fbbf24;
         }
 
         .bank-info-display {
@@ -162,7 +151,7 @@
         .confirm-button {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white;
             border: none;
             border-radius: 8px;
@@ -174,7 +163,7 @@
 
         .confirm-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(21, 128, 61, 0.3);
+            box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3);
         }
 
         .confirm-button:disabled {
@@ -202,7 +191,7 @@
 
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.2);
-            border-top: 4px solid #3b82f6;
+            border-top: 4px solid #f59e0b;
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -271,7 +260,7 @@
     }
 
     .copy-btn {
-      background: #3b82f6;
+      background: #f59e0b;
       color: white;
       border: none;
       border-radius: 6px;
@@ -282,22 +271,22 @@
     }
 
     .copy-btn:hover {
-      background: #2563eb;
+      background: #d97706;
     }
 
     .receipt-upload-area {
-      border: 2px dashed #cbd5e1;
+      border: 2px dashed #fbbf24;
       border-radius: 8px;
       padding: 30px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      background: #f8fafc;
+      background: #fef3c7;
     }
 
     .receipt-upload-area:hover {
-      border-color: #3b82f6;
-      background: #f0f9ff;
+      border-color: #d97706;
+      background: #fde68a;
     }
 
     .receipt-preview {
@@ -312,7 +301,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: #f1f5f9;
+      background: #fef3c7;
       border: none;
       border-radius: 8px;
       padding: 10px 15px;
@@ -323,17 +312,17 @@
     }
 
     .back-button:hover {
-      background: #e2e8f0;
+      background: #fde68a;
     }
 
-    /* NOVOS ESTILOS PARA TEMA DE FUTEBOL */
-    .grass-background {
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+    /* NOVOS ESTILOS PARA TEMA DE BINA/CONSTRUÇÃO CIVIL */
+    .construction-background {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
       position: relative;
       overflow: hidden;
     }
 
-    .grass-background::before {
+    .construction-background::before {
       content: "";
       position: absolute;
       top: 0;
@@ -341,22 +330,22 @@
       right: 0;
       bottom: 0;
       background-image: 
-        linear-gradient(90deg, transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%),
-        linear-gradient(transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%);
-      background-size: 40px 40px;
+        linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.1) 50%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.1) 50%, transparent 52%);
+      background-size: 60px 60px;
       pointer-events: none;
     }
 
-    .football-field {
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
-      border: 2px solid #ffffff;
+    .construction-site {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+      border: 2px solid #854d0e;
       border-radius: 12px;
       padding: 20px;
       position: relative;
       overflow: hidden;
     }
 
-    .football-field::before {
+    .construction-site::before {
       content: "";
       position: absolute;
       top: 0;
@@ -364,15 +353,15 @@
       right: 0;
       bottom: 0;
       background-image: 
-        linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.3) 50%, transparent 51%),
-        linear-gradient(transparent 49%, rgba(255,255,255,0.3) 50%, transparent 51%);
-      background-size: 30px 30px;
+        linear-gradient(90deg, transparent 49%, rgba(133, 77, 14, 0.3) 50%, transparent 51%),
+        linear-gradient(transparent 49%, rgba(133, 77, 14, 0.3) 50%, transparent 51%);
+      background-size: 40px 40px;
       pointer-events: none;
     }
 
-    .bank-info-grass {
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-      border: 2px solid white;
+    .bank-info-construction {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      border: 2px solid #854d0e;
       border-radius: 12px;
       padding: 20px;
       color: white;
@@ -382,23 +371,25 @@
       overflow: hidden;
     }
 
-    .bank-info-grass::before {
+    .bank-info-construction::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: 
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 20%),
-        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 20%);
+      background-image: url('img/novo.png');
+      background-size: 100px;
+      background-position: right bottom;
+      background-repeat: no-repeat;
+      opacity: 0.1;
       pointer-events: none;
     }
 
-    .grass-button {
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    .construction-button {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
       color: white;
-      border: 2px solid white;
+      border: 2px solid #854d0e;
       border-radius: 8px;
       padding: 12px 20px;
       font-weight: bold;
@@ -406,35 +397,46 @@
       transition: all 0.3s ease;
     }
 
-    .grass-button:hover {
+    .construction-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
-      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
     }
 
-    .white-card {
+    .yellow-card {
       background: white;
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      border: 1px solid #e2e8f0;
+      border: 1px solid #fde68a;
     }
 
-    .green-text {
-      color: #15803d;
+    .construction-text {
+      color: #b45309;
     }
 
     .white-text {
       color: white;
     }
+    
+    .construction-icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-image: url('img/novo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      vertical-align: middle;
+    }
   </style>
 </head>
 
-<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+<body class="bg-yellow-50 text-neutral-900 min-h-screen font-sans">
   <div class="max-w-md mx-auto pb-24">
     <!-- Header -->
-    <header class="grass-background shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-green-600">
-      <button onclick="history.back()" class="text-slate-500 text-2xl font-bold hover:text-green-600">
+    <header class="construction-background shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-yellow-600">
+      <button onclick="history.back()" class="text-slate-500 text-2xl font-bold hover:text-yellow-600">
   &#8592;
 </button>
       <h1 class="text-lg font-bold text-white tracking-tight">Área de Depósito</h1>
@@ -445,27 +447,27 @@
     <div id="bankSelectionScreen">
       <!-- Cartão do saldo -->
       <section class="px-5 mt-6">
-        <div class="football-field text-white p-5 flex items-center justify-between">
+        <div class="construction-site text-white p-5 flex items-center justify-between">
           <div>
             <p class="text-sm opacity-90 mb-1">Saldo atual</p>
             <p class="text-2xl font-bold" id="userBalance">KZ 0,00</p>
           </div>
           <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-            <span class="text-green-600 font-bold text-lg">⚽</span>
+            <span class="construction-icon"></span>
           </div>
         </div>
       </section>
 
       <!-- Seletor de valores -->
       <section class="px-5 mt-8">
-        <p class="text-sm font-medium text-green-800 mb-2">Selecione um valor rápido</p>
+        <p class="text-sm font-medium text-yellow-800 mb-2">Selecione um valor rápido</p>
         <div class="grid grid-cols-3 gap-3">
-          <button data-value="4000" class="grass-button text-sm font-semibold py-2 text-center">KZ 4.000</button>
-          <button data-value="8000" class="grass-button text-sm font-semibold py-2 text-center">KZ 8.000</button>
-          <button data-value="16000" class="grass-button text-sm font-semibold py-2 text-center">KZ 16.000</button>
-          <button data-value="32000" class="grass-button text-sm font-semibold py-2 text-center">KZ 32.000</button>
-          <button data-value="64000" class="grass-button text-sm font-semibold py-2 text-center">KZ 64.000</button>
-          <button data-value="128000" class="grass-button text-sm font-semibold py-2 text-center">KZ 128.000</button>
+          <button data-value="4000" class="construction-button text-sm font-semibold py-2 text-center">KZ 4.000</button>
+          <button data-value="8000" class="construction-button text-sm font-semibold py-2 text-center">KZ 8.000</button>
+          <button data-value="16000" class="construction-button text-sm font-semibold py-2 text-center">KZ 16.000</button>
+          <button data-value="32000" class="construction-button text-sm font-semibold py-2 text-center">KZ 32.000</button>
+          <button data-value="64000" class="construction-button text-sm font-semibold py-2 text-center">KZ 64.000</button>
+          <button data-value="128000" class="construction-button text-sm font-semibold py-2 text-center">KZ 128.000</button>
         </div>
       </section>
 
@@ -473,23 +475,23 @@
       <section class="px-5 mt-6">
         <form id="depositForm" class="space-y-5">
           <div>
-            <label for="valorInput" class="text-sm font-medium text-green-800 block mb-1">Outro valor</label>
-            <div class="flex items-center bg-white border border-green-300 rounded-lg px-3 py-2">
-              <span class="text-green-600 font-semibold mr-2">KZ</span>
-              <input required name="amount" id="valorInput" type="number" class="w-full bg-transparent outline-none placeholder-green-400" placeholder="Digite um valor" value="" min="5000" />
+            <label for="valorInput" class="text-sm font-medium text-yellow-800 block mb-1">Outro valor</label>
+            <div class="flex items-center bg-white border border-yellow-300 rounded-lg px-3 py-2">
+              <span class="text-yellow-600 font-semibold mr-2">KZ</span>
+              <input required name="amount" id="valorInput" type="number" class="w-full bg-transparent outline-none placeholder-yellow-400" placeholder="Digite um valor" value="" min="5000" />
             </div>
           </div>
 
           <div>
-            <p class="text-sm font-medium text-green-800 mb-2">Escolha o banco para depósito</p>
-            <div class="bank-info-grass cursor-pointer" onclick="openBankModal()">
+            <p class="text-sm font-medium text-yellow-800 mb-2">Escolha o banco para depósito</p>
+            <div class="bank-info-construction cursor-pointer" onclick="openBankModal()">
               <div class="flex items-center">
                 <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mr-3">
-                  <span class="text-green-600 font-bold">⚽</span>
+                  <span class="construction-icon"></span>
                 </div>
                 <div class="bank-info">
                   <div class="bank-name font-medium" id="selectedBankName">Selecione o banco</div>
-                  <div class="bank-desc text-green-100 text-sm" id="selectedBankDesc">Toque para escolher com as bolas de futebol</div>
+                  <div class="bank-desc text-yellow-100 text-sm" id="selectedBankDesc">Toque para escolher com os símbolos de construção</div>
                 </div>
                 <svg class="w-5 h-5 text-white ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -499,18 +501,18 @@
             <input type="hidden" id="bankCode" value="">
           </div>
 
-          <button type="button" onclick="validateForm()" id="btnDepositar" class="w-full grass-button font-semibold py-3 shadow">Depositar agora</button>
+          <button type="button" onclick="validateForm()" id="btnDepositar" class="w-full construction-button font-semibold py-3 shadow">Depositar agora</button>
         </form>
 
-        <div class="mt-6 text-xs text-green-700 leading-relaxed space-y-3">
+        <div class="mt-6 text-xs text-yellow-700 leading-relaxed space-y-3">
           <h2 class="text-sm font-bold">Informações de Recarga</h2>
           <div class="flex items-start gap-2">
-            <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
+            <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
             <p>O valor mínimo de recarga é de <strong>KZ 4.000</strong>.</p>
           </div>
 
           <div class="flex items-start gap-2">
-            <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce mt-1"></div>
+            <div class="w-4 h-4 bg-red-500 rounded-full animate-bounce mt-1"></div>
             <p><strong>Você deve enviar uma nova solicitação de recarga para cada depósito</strong>.</p>
           </div>
 
@@ -531,7 +533,7 @@
         Voltar
       </button>
 
-      <div class="football-field text-white">
+      <div class="construction-site text-white">
         <h2 class="text-xl font-bold mb-4 text-center">Informações para Depósito</h2>
         
         <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-3">
@@ -553,7 +555,7 @@
             <span class="font-medium">Número da Conta (IBAN):</span>
             <div class="flex items-center">
               <span class="font-bold mr-2" id="detailIban">-</span>
-              <button class="bg-white text-green-600 px-2 py-1 rounded text-xs font-bold" onclick="copyToClipboard('detailIban')">Copiar</button>
+              <button class="bg-white text-yellow-600 px-2 py-1 rounded text-xs font-bold" onclick="copyToClipboard('detailIban')">Copiar</button>
             </div>
           </div>
         </div>
@@ -563,7 +565,7 @@
             <span class="font-medium">Referência:</span>
             <div class="flex items-center">
               <span class="font-bold mr-2" id="detailReference">-</span>
-              <button class="bg-white text-green-600 px-2 py-1 rounded text-xs font-bold" onclick="copyToClipboard('detailReference')">Copiar</button>
+              <button class="bg-white text-yellow-600 px-2 py-1 rounded text-xs font-bold" onclick="copyToClipboard('detailReference')">Copiar</button>
             </div>
           </div>
         </div>
@@ -576,42 +578,42 @@
         </div>
       </div>
 
-      <div class="white-card mt-6">
-        <h3 class="text-lg font-semibold text-green-800 mb-4">Enviar Comprovante</h3>
+      <div class="yellow-card mt-6">
+        <h3 class="text-lg font-semibold text-yellow-800 mb-4">Enviar Comprovante</h3>
         
-        <div class="receipt-upload-area border-green-300" onclick="openGallery()">
+        <div class="receipt-upload-area" onclick="openGallery()">
           <input type="file" id="receiptInput" accept="image/*" class="hidden" onchange="handleReceiptUpload(event)">
           <div class="flex flex-col items-center">
-            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-              <span class="text-green-600 text-xl">⚽</span>
+            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+              <span class="construction-icon"></span>
             </div>
-            <p class="text-green-700 font-medium">Clique para enviar o comprovante</p>
-            <p class="text-green-600 text-sm mt-1">PNG, JPG (MAX. 5MB)</p>
+            <p class="text-yellow-700 font-medium">Clique para enviar o comprovante</p>
+            <p class="text-yellow-600 text-sm mt-1">PNG, JPG (MAX. 5MB)</p>
           </div>
         </div>
         
         <img id="receiptPreview" class="receipt-preview">
-        <p id="fileName" class="text-sm text-green-600 mt-2 text-center hidden"></p>
+        <p id="fileName" class="text-sm text-yellow-600 mt-2 text-center hidden"></p>
         
-        <button id="submitDepositBtn" class="w-full grass-button font-semibold py-3 shadow mt-4" onclick="submitDeposit()" disabled>Confirmar Depósito</button>
+        <button id="submitDepositBtn" class="w-full construction-button font-semibold py-3 shadow mt-4" onclick="submitDeposit()" disabled>Confirmar Depósito</button>
       </div>
     </div>
 
-    <!-- Modal de Seleção de Bancos com Bolas de Futebol -->
+    <!-- Modal de Seleção de Bancos com Símbolos de Construção -->
     <div id="bankModal" class="fixed inset-0 z-50 hidden items-center justify-center backdrop-blur-sm bg-black/40" onclick="closeBankModal(event)">
-      <div onclick="event.stopPropagation()" class="football-field compact-modal">
+      <div onclick="event.stopPropagation()" class="construction-site compact-modal">
         <div class="compact-modal-content">
-          <div class="flex justify-between items-center border-b border-green-300 pb-3 mb-3">
+          <div class="flex justify-between items-center border-b border-yellow-300 pb-3 mb-3">
             <h3 class="text-lg font-bold text-white">Selecione o Banco</h3>
-            <button onclick="closeBankModal()" class="text-white hover:text-green-200 text-xl font-bold">×</button>
+            <button onclick="closeBankModal()" class="text-white hover:text-yellow-200 text-xl font-bold">×</button>
           </div>
           
           <div class="text-center mb-4">
-            <p class="text-green-100">Escolha um banco tocando em uma bola de futebol</p>
+            <p class="text-yellow-100">Escolha um banco tocando em um símbolo de construção</p>
           </div>
           
-          <div class="football-container" id="footballContainer">
-            <!-- As bolas de futebol serão inseridas aqui via JavaScript -->
+          <div class="construction-container" id="constructionContainer">
+            <!-- Os símbolos de construção serão inseridos aqui via JavaScript -->
           </div>
         </div>
       </div>
@@ -619,7 +621,7 @@
 
     <!-- Loading -->
     <div id="loading" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
-      <div class="football-field p-6 rounded-xl shadow-lg flex flex-col items-center">
+      <div class="construction-site p-6 rounded-xl shadow-lg flex flex-col items-center">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
         <p class="text-white">Processando seu depósito...</p>
       </div>
@@ -627,8 +629,8 @@
   </div>
 
   <!-- Menu de navegação com ícones de imagem -->
-    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
-      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-yellow-100 rounded-t-2xl overflow-hidden">
+      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 text-white text-xs">
         
         <li>
           <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
@@ -731,15 +733,15 @@
                 depositInput.value = value;
                 
                 // Ativar visualmente o botão clicado
-                amountButtons.forEach(b => b.classList.remove('bg-green-800', 'text-white'));
-                this.classList.add('bg-green-800', 'text-white');
+                amountButtons.forEach(b => b.classList.remove('bg-yellow-800', 'text-white'));
+                this.classList.add('bg-yellow-800', 'text-white');
             });
         });
 
         // Validar input manual
         depositInput.addEventListener('input', function() {
             // Remover seleção dos botões quando digitar manualmente
-            amountButtons.forEach(b => b.classList.remove('bg-green-800', 'text-white'));
+            amountButtons.forEach(b => b.classList.remove('bg-yellow-800', 'text-white'));
         });
     }
 
@@ -777,8 +779,8 @@
         document.getElementById('bankModal').classList.remove('hidden');
         document.getElementById('bankModal').classList.add('flex');
         
-        // Inicializar as bolas de futebol
-        initFootballBalls();
+        // Inicializar os símbolos de construção
+        initConstructionBalls();
     }
 
     // Fechar modal
@@ -789,9 +791,9 @@
         }
     }
 
-    // Inicializar as bolas de futebol
-    function initFootballBalls() {
-        const container = document.getElementById('footballContainer');
+    // Inicializar os símbolos de construção
+    function initConstructionBalls() {
+        const container = document.getElementById('constructionContainer');
         container.innerHTML = '';
         
         const banks = ['BAI', 'BFA', 'BIC', 'ATL'];
@@ -801,7 +803,7 @@
         
         banks.forEach((bankCode, index) => {
             const ball = document.createElement('div');
-            ball.className = 'football-ball';
+            ball.className = 'construction-ball';
             ball.id = `ball-${bankCode}`;
             ball.dataset.bank = bankCode;
             
@@ -819,7 +821,7 @@
             
             container.appendChild(ball);
             
-            // Animação para mover a bola para sua posição no círculo
+            // Animação para mover o símbolo para sua posição no círculo
             setTimeout(() => {
                 const angle = (index / banks.length) * 2 * Math.PI;
                 const x = centerX + radius * Math.cos(angle) - 40;
@@ -830,12 +832,12 @@
             }, 100 * index);
             
             // Adicionar evento de clique
-            ball.addEventListener('click', () => selectFootballBall(bankCode));
+            ball.addEventListener('click', () => selectConstructionBall(bankCode));
         });
     }
 
-    // Selecionar uma bola de futebol
-    function selectFootballBall(bankCode) {
+    // Selecionar um símbolo de construção
+    function selectConstructionBall(bankCode) {
         selectedBank = bankCode;
         
         // Atualizar informações do banco selecionado

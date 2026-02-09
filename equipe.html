@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Minha Equipe - USHK</title>
+  <script src="js/tailwindcss.js"></script>
+  <link href="js/fonts.googleapis.css" rel="stylesheet" />
+  <link href="js/boxicons.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+    
+    body {
+      min-height: 100vh;
+    }
+    
+    .container-adaptive {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .loader {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Tema de Futebol - Verde e Branco */
+    .grass-background {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .grass-background::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(90deg, transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%),
+        linear-gradient(transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .football-field {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+      border: 2px solid #ffffff;
+      border-radius: 12px;
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .football-field::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.3) 50%, transparent 51%),
+        linear-gradient(transparent 49%, rgba(255,255,255,0.3) 50%, transparent 51%);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    .football-ball {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+      border: 3px solid #15803d;
+      overflow: hidden;
+    }
+
+    .football-ball::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(to right, #000 0%, #000 5%, transparent 5%, transparent 95%, #000 95%, #000 100%),
+        linear-gradient(to bottom, #000 0%, #000 5%, transparent 5%, transparent 95%, #000 95%, #000 100%),
+        radial-gradient(circle at 30% 30%, #000 0%, #000 10%, transparent 10%),
+        radial-gradient(circle at 70% 30%, #000 0%, #000 10%, transparent 10%),
+        radial-gradient(circle at 50% 70%, #000 0%, #000 10%, transparent 10%),
+        radial-gradient(circle at 20% 50%, #000 0%, #000 10%, transparent 10%),
+        radial-gradient(circle at 80% 50%, #000 0%, #000 10%, transparent 10%);
+      background-size: 
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%;
+      background-repeat: no-repeat;
+      opacity: 0.7;
+    }
+
+    .ball-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #15803d;
+      font-weight: bold;
+      font-size: 10px;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+      padding: 0 5px;
+    }
+
+    .football-button {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-size: 0.875rem;
+    }
+
+    .football-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    }
+
+    .white-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+      width: 100%;
+    }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      z-index: 10000;
+      opacity: 0;
+      transition: opacity 0.3s;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+    }
+
+    .infinite-scroll-loader {
+      text-align: center;
+      padding: 15px;
+      color: #666;
+    }
+
+    .level-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border: 2px solid #22c55e;
+      border-radius: 12px;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .level-card::before {
+      content: "⚽";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 40px;
+      opacity: 0.1;
+      transform: rotate(15deg);
+    }
+
+    .nav-football {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+      width: 100%;
+    }
+    
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .back-button i {
+      color: white;
+      font-size: 24px;
+    }
+    
+    /* Ajustes responsivos para telas menores */
+    @media (max-width: 360px) {
+      .container-adaptive {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+      
+      .football-field {
+        padding: 1rem;
+      }
+      
+      .white-card {
+        padding: 1rem;
+      }
+      
+      .football-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+      }
+    }
+    
+    /* Garantir que tudo fique dentro da tela */
+    .content-wrapper {
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      width: 100%;
+    }
+    
+    .stats-item {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 0.75rem;
+      padding: 0.5rem;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .link-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    
+    @media (min-width: 400px) {
+      .link-input-container {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    
+    .link-input {
+      flex: 1;
+      min-width: 0; /* Permite que o input encolha */
+    }
+  </style>
+</head>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+  <!-- Modal de Convidados -->
+  <div id="modalIndicados" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-50">
+    <div class="bg-white rounded-xl w-full max-w-md max-h-[90vh] overflow-hidden flex flex-col mx-4">
+      <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+        <h3 class="text-lg font-semibold" id="modalTitle">Indicados</h3>
+        <button onclick="fecharModal()" class="text-gray-500 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-4 overflow-y-auto flex-1" id="modalContent">
+        <!-- Conteúdo do modal será carregado aqui -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div id="loadingOverlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center mx-4">
+      <div class="loader mb-4"></div>
+      <p class="text-gray-700">Carregando dados da equipe...</p>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="container-adaptive pb-28 bg-green-50 text-neutral-900 min-h-screen font-sans">
+
+      <!-- Header com tema de futebol -->
+      <div class="grass-background px-5 pt-6 pb-4 text-white relative overflow-hidden">
+        <!-- Botão Voltar -->
+        <button class="back-button" onclick="goBack()">
+          <i class='bx bx-arrow-back'></i>
+        </button>
+
+        <h2 class="text-xl font-bold mb-4 text-center tracking-tight">Equipe</h2>
+
+        <!-- Cartão principal com campo de futebol -->
+        <div class="football-field text-white mb-4">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-sm opacity-90 mb-1">Meu Time</p>
+              <p class="text-2xl font-bold" id="peopleAdded">0 Jogadores</p>
+            </div>
+            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+              <span class="text-green-600 font-bold text-lg">⚽</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estatísticas rápidas -->
+        <div class="stats-grid">
+          <div class="stats-item">
+            <p class="text-xs opacity-90">Comissões</p>
+            <p id="incomeAdded" class="text-sm font-bold">KZ 0</p>
+          </div>
+          <div class="stats-item">
+            <p class="text-xs opacity-90">Tamanho</p>
+            <p id="teamSize" class="text-sm font-bold">0</p>
+          </div>
+          <div class="stats-item">
+            <p class="text-xs opacity-90">Recarga</p>
+            <p id="cumulativeRecharge" class="text-sm font-bold">KZ 0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conteúdo principal -->
+      <div class="px-5 -mt-4">
+        <!-- Área de compartilhamento -->
+        <div class="white-card mb-4">
+          <p class="mb-2 text-green-800 font-medium">Link do Meu Time</p>
+          <div class="link-input-container">
+            <input
+              id="invitationLink"
+              type="text"
+              readonly
+              class="link-input bg-green-50 text-green-700 text-xs px-3 py-2 border border-green-200 rounded-md outline-none cursor-default" />
+            <button onclick="copyLink()" class="football-button text-xs">Copiar</button>
+          </div>
+
+          <p class="text-xs text-green-600 leading-snug mt-3">
+            Convide amigos para o seu time e ganhe comissões!
+          </p>
+        </div>
+
+        <!-- Análise de renda -->
+        <div class="white-card mb-4">
+          <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
+            <span>📊</span> Estatísticas do Time
+          </h3>
+          <div class="space-y-2">
+            <div class="flex justify-between">
+              <span class="text-green-700">Recarga Total:</span>
+              <span id="cumulativeRecharge2" class="font-medium text-green-800">KZ 0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-green-700">Em Processo:</span>
+              <span id="processingRecharge" class="font-medium text-green-800">KZ 0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-green-700">Bonus geral:</span>
+              <span id="validWithdrawal" class="font-medium text-green-800">KZ 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dados por nível com tema de futebol -->
+        <div class="mb-4">
+          <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
+            <span>🥅</span> Formação do Time
+          </h3>
+          <div class="space-y-3" id="levelDataContainer">
+            <!-- Os níveis serão carregados aqui -->
+            <div class="text-center py-4">
+              <div class="loader mx-auto mb-2"></div>
+              <p class="text-green-600 text-sm">Carregando dados da equipe...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Última atualização -->
+        <div class="text-center">
+          <p id="lastUpdate" class="text-xs text-green-600">⏱️ Última atualização: --:--:--</p>
+        </div>
+      </div>
+
+       <!-- Menu de navegação com ícones de imagem -->
+      <nav class="fixed bottom-0 left-0 right-0 z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+        <div class="container-adaptive p-0">
+          <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+            
+            <li class="flex-1 text-center">
+              <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold px-1">
+                <img src="img/home.png" alt="Início" class="w-6 h-6">
+                <span>Início</span>
+              </a>
+            </li>
+            
+            <li class="flex-1 text-center">
+              <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80 px-1">
+                <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+                <span>Renda</span>
+              </a>
+            </li>
+            
+            <li class="flex-1 text-center">
+              <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80 px-1">
+                <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+                <span>VIP</span>
+              </a>
+            </li>
+            
+            <li class="flex-1 text-center">
+              <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80 px-1">
+                <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+                <span>Bancária</span>
+              </a>
+            </li>
+            
+            <li class="flex-1 text-center">
+              <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80 px-1">
+                <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+                <span>Perfil</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+
+  <script>
+    // Variáveis globais
+    let currentLevel = 1;
+    let currentPage = 1;
+    let isLoadingMore = false;
+    let hasMoreData = true;
+
+    // Função para voltar à página anterior
+    function goBack() {
+      window.history.back();
+    }
+
+    // Função para obter token do localStorage
+    function getAuthToken() {
+        const tokenData = localStorage.getItem('user_token');
+        if (!tokenData) return null;
+
+        try {
+            const { token, expiry } = JSON.parse(tokenData);
+            // Verificar expiração
+            if (Date.now() > expiry) {
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                return null;
+            }
+            return token;
+        } catch (e) {
+            console.error('Erro ao processar token:', e);
+            return null;
+        }
+    }
+
+    // Função para mostrar loading
+    function showLoading() {
+        document.getElementById('loadingOverlay').classList.remove('hidden');
+    }
+
+    // Função para esconder loading
+    function hideLoading() {
+        document.getElementById('loadingOverlay').classList.add('hidden');
+    }
+
+    // Função para mostrar toast
+    function showCopyToast(text = 'Copiado!') {
+        let t = document.getElementById('copyToast');
+        if (!t) {
+            t = document.createElement('div');
+            t.id = 'copyToast';
+            t.className = 'copy-toast';
+            document.body.appendChild(t);
+        }
+        t.textContent = text;
+        t.classList.add('show');
+        clearTimeout(t._h);
+        t._h = setTimeout(() => t.classList.remove('show'), 1400);
+    }
+
+    // Copiar link
+    async function copyLink() {
+        const text = document.getElementById('invitationLink').value;
+        const toCopy = String(text || '').replace(/\s+/g, '');
+
+        let ok = false;
+        try {
+            await navigator.clipboard.writeText(toCopy);
+            ok = true;
+        } catch (e) {
+            try {
+                const input = document.createElement('input');
+                input.value = toCopy;
+                input.style.position = 'fixed';
+                input.style.opacity = '0';
+                document.body.appendChild(input);
+                input.select();
+                input.setSelectionRange(0, input.value.length);
+                ok = document.execCommand('copy');
+                document.body.removeChild(input);
+            } catch (_) {}
+        }
+
+        if (ok) {
+            showCopyToast('Link copiado! ⚽');
+        } else {
+            alert('Não foi possível copiar. Toque e segure para copiar manualmente.');
+        }
+    }
+
+    // Buscar dados da equipe
+    async function fetchTeamData() {
+        const authToken = getAuthToken();
+        const userId = localStorage.getItem('user_id');
+
+        if (!authToken || !userId) {
+            console.error('Usuário não autenticado');
+            window.location.href = '/index.html';
+            return;
+        }
+
+        showLoading();
+
+        try {
+            const response = await fetch(`https://bd-p4q7.onrender.com/api/team/statistics`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                updateTeamData(data.data);
+            } else {
+                console.error('Erro ao buscar dados da equipe:', response.status);
+                // Tentar carregar dados de fallback se disponíveis
+                loadFallbackData();
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            // Tentar carregar dados de fallback se disponíveis
+            loadFallbackData();
+        } finally {
+            hideLoading();
+        }
+    }
+
+    // Carregar dados de fallback (para demonstração)
+    function loadFallbackData() {
+        const fallbackData = {
+            team_overview: {
+                people_added: 12,
+                income_added: 24500,
+                invitation_link: "https://ushk.com/convite/ABC123"
+            },
+            income_analysis: {
+                team_size: 12,
+                cumulative_recharge: 120000,
+                processing_recharge: 15000,
+                valid_withdrawal: 24500
+            },
+            level_data: {
+                level1: {
+                    valid_members: 8,
+                    team_recharge: 80000,
+                    team_withdrawal: 21600
+                },
+                level2: {
+                    valid_members: 3,
+                    team_recharge: 30000,
+                    team_withdrawal: 2400
+                },
+                level3: {
+                    valid_members: 1,
+                    team_recharge: 10000,
+                    team_withdrawal: 500
+                }
+            }
+        };
+        
+        updateTeamData(fallbackData);
+    }
+
+    // Atualizar interface com dados da equipe
+    function updateTeamData(data) {
+        if (!data) return;
+
+        // Atualizar dados gerais
+        if (data.team_overview) {
+            document.getElementById('peopleAdded').textContent = `${data.team_overview.people_added || '0'} Jogadores`;
+            document.getElementById('incomeAdded').textContent = `KZ ${formatNumber(data.team_overview.income_added || 0)}`;
+            if (data.team_overview.invitation_link) {
+                document.getElementById('invitationLink').value = data.team_overview.invitation_link;
+            }
+        }
+
+        if (data.income_analysis) {
+            document.getElementById('teamSize').textContent = data.income_analysis.team_size || '0';
+            document.getElementById('cumulativeRecharge').textContent = `KZ ${formatNumber(data.income_analysis.cumulative_recharge || 0)}`;
+            document.getElementById('cumulativeRecharge2').textContent = `KZ ${formatNumber(data.income_analysis.cumulative_recharge || 0)}`;
+            document.getElementById('processingRecharge').textContent = `KZ ${formatNumber(data.income_analysis.processing_recharge || 0)}`;
+            document.getElementById('validWithdrawal').textContent = `KZ ${formatNumber(data.income_analysis.valid_withdrawal || 0)}`;
+        }
+
+        // Atualizar dados por nível
+        updateLevelData(data.level_data);
+
+        document.getElementById('lastUpdate').textContent = `⏱️ Última atualização: ${new Date().toLocaleTimeString()}`;
+    }
+
+    // Atualizar dados dos níveis
+    function updateLevelData(levelData) {
+        const container = document.getElementById('levelDataContainer');
+        container.innerHTML = '';
+
+        if (!levelData) {
+            container.innerHTML = '<div class="text-center text-gray-500 py-4">Nenhum dado disponível</div>';
+            return;
+        }
+
+        const levels = [
+            { key: 'level1', name: '⚽ Nível 1', commission: '25%', icon: '🥇' },
+            { key: 'level2', name: '⚽ Nível 2', commission: '2%', icon: '🥈' },
+            { key: 'level3', name: '⚽ Nível 3', commission: '1%', icon: '🥉' }
+        ];
+
+        levels.forEach(level => {
+            const data = levelData[level.key];
+            if (data) {
+                const levelCard = document.createElement('div');
+                levelCard.className = 'level-card animate-fade-in';
+                levelCard.innerHTML = `
+                    <div class="flex justify-between items-center mb-3">
+                        <div>
+                            <h4 class="font-semibold text-green-800">${level.name}</h4>
+                            <p class="text-xs text-green-600">${level.commission} comissão</p>
+                        </div>
+                        <button onclick="openMembersModal(${level.key.replace('level', '')}, '${level.name}')" 
+                                class="football-button text-xs">
+                            Ver Jogadores
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                        <div class="text-center">
+                            <p class="text-green-600">Jogadores</p>
+                            <p class="font-semibold text-green-800">${data.valid_members || 0}</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-green-600">Recarga</p>
+                            <p class="font-semibold text-green-800">KZ ${formatNumber(data.team_recharge || 0)}</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-green-600">Comissão</p>
+                            <p class="font-semibold text-green-800">KZ ${formatNumber(data.team_withdrawal || 0)}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(levelCard);
+            }
+        });
+    }
+
+    // Abrir modal de membros
+    async function openMembersModal(level, levelName) {
+        currentLevel = level;
+        currentPage = 1;
+        hasMoreData = true;
+        
+        document.getElementById('modalTitle').textContent = `Jogadores - ${levelName}`;
+        document.getElementById('modalIndicados').classList.remove('hidden');
+        
+        await loadMembersModalContent();
+        
+        // Adicionar evento de scroll infinito
+        const modalContent = document.getElementById('modalContent');
+        modalContent.onscroll = handleModalScroll;
+    }
+
+    // Carregar conteúdo do modal
+    async function loadMembersModalContent() {
+        const authToken = getAuthToken();
+        if (!authToken) return;
+
+        if (currentPage === 1) {
+            document.getElementById('modalContent').innerHTML = `
+                <div class="infinite-scroll-loader">
+                    <div class="loader"></div>
+                    <p>Carregando jogadores...</p>
+                </div>
+            `;
+        }
+
+        try {
+            const response = await fetch(`https://bd-p4q7.onrender.com/api/team/members?level=${currentLevel}&page=${currentPage}&limit=20`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                displayMembers(data.data.members, data.data.pagination);
+            } else {
+                throw new Error('Erro ao carregar jogadores');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            // Carregar dados de exemplo para demonstração
+            loadFallbackMembers();
+        }
+    }
+
+    // Carregar membros de exemplo
+    function loadFallbackMembers() {
+        const fallbackMembers = [
+            {
+                mobile: "+244 123 456 789",
+                saldo: 15000,
+                created_at: new Date().toISOString(),
+                invitation_code: "ABC123",
+                purchase_count: 3
+            },
+            {
+                mobile: "+244 987 654 321",
+                saldo: 25000,
+                created_at: new Date(Date.now() - 86400000).toISOString(),
+                invitation_code: "DEF456",
+                purchase_count: 5
+            },
+            {
+                mobile: "+244 555 123 456",
+                saldo: 8000,
+                created_at: new Date(Date.now() - 172800000).toISOString(),
+                invitation_code: "GHI789",
+                purchase_count: 2
+            }
+        ];
+        
+        const pagination = {
+            pages: 1
+        };
+        
+        displayMembers(fallbackMembers, pagination);
+    }
+
+    // Exibir membros no modal
+    function displayMembers(members, pagination) {
+        const modalContent = document.getElementById('modalContent');
+        
+        if (currentPage === 1) {
+            modalContent.innerHTML = '';
+        }
+
+        if (!members || members.length === 0) {
+            if (currentPage === 1) {
+                modalContent.innerHTML = '<div class="text-center text-gray-500 py-8">Nenhum jogador encontrado ⚽</div>';
+            }
+            hasMoreData = false;
+            return;
+        }
+
+        // Adicionar membros à lista
+        members.forEach(member => {
+            const memberElement = document.createElement('div');
+            memberElement.className = 'border-b border-green-200 py-3 last:border-b-0 animate-fade-in';
+            memberElement.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="font-medium text-green-800">${member.mobile || 'N/A'}</p>
+                        <p class="text-xs text-green-600">Saldo: KZ ${formatNumber(member.saldo || 0)}</p>
+                        <p class="text-xs text-green-500">Cadastro: ${new Date(member.created_at).toLocaleDateString('pt-BR')}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">${member.invitation_code || 'N/A'}</p>
+                        <p class="text-xs text-green-500 mt-1">Compras: ${member.purchase_count || 0}</p>
+                    </div>
+                </div>
+            `;
+            modalContent.appendChild(memberElement);
+        });
+
+        // Verificar se há mais dados
+        hasMoreData = currentPage < pagination.pages;
+        
+        // Remover loader anterior se existir
+        const existingLoader = document.querySelector('.infinite-scroll-loader');
+        if (existingLoader) {
+            existingLoader.remove();
+        }
+
+        // Adicionar loader para próxima página se houver mais dados
+        if (hasMoreData) {
+            const loader = document.createElement('div');
+            loader.className = 'infinite-scroll-loader';
+            loader.innerHTML = '<div class="loader"></div><p>Carregando mais jogadores...</p>';
+            loader.id = 'infiniteLoader';
+            modalContent.appendChild(loader);
+        }
+
+        isLoadingMore = false;
+    }
+
+    // Manipular scroll infinito
+    function handleModalScroll(event) {
+        const element = event.target;
+        const scrollThreshold = 100; // pixels from bottom
+
+        if (element.scrollHeight - element.scrollTop - element.clientHeight < scrollThreshold && 
+            !isLoadingMore && 
+            hasMoreData) {
+            
+            loadMoreMembers();
+        }
+    }
+
+    // Carregar mais membros
+    async function loadMoreMembers() {
+        if (isLoadingMore || !hasMoreData) return;
+
+        isLoadingMore = true;
+        currentPage++;
+        
+        await loadMembersModalContent();
+    }
+
+    // Fechar modal
+    function fecharModal() {
+        document.getElementById('modalIndicados').classList.add('hidden');
+        currentPage = 1;
+        hasMoreData = true;
+        isLoadingMore = false;
+        
+        // Remover event listener de scroll
+        const modalContent = document.getElementById('modalContent');
+        modalContent.onscroll = null;
+    }
+
+    // Função para formatar números
+    function formatNumber(num) {
+        return new Intl.NumberFormat('pt-AO').format(num);
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function () {
+        if (getAuthToken() && localStorage.getItem('user_id')) {
+            // Carregar dados imediatamente
+            fetchTeamData();
+            // Atualizar a cada 100 segundos
+            setInterval(fetchTeamData, 100000);
+        } else {
+            window.location.href = '/index.html';
+        }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<title>Login USHK</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2E7D32">
+
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+
+<!-- Toastify CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="all.css"/>
+<link rel="stylesheet" href="style.css"/>
+<script type="text/javascript" src="min.js"></script>
+<script type="text/javascript" src="layer.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript" src="public.js"></script>
+
+<!-- Toastify JS -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<style>
+/* Cores de futebol definidas */
+:root {
+  --green-dark: #1B5E20;
+  --green-medium: #2E7D32;
+  --green-light: #4CAF50;
+  --green-lighter: #E8F5E9;
+  --green-accent: #388E3C;
+  --white: #FFFFFF;
+  --field-green: #43A047;
+}
+
+body {
+  background-color: var(--green-lighter);
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 260px;
+  background-image: url('img/logo2.png');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+.container .auth_bg {
+  margin-top: 33px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.container .form {
+  position: relative;
+  top: 28px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: var(--white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+}
+
+.u-form-item {
+  padding: 10px 30px;
+}
+
+::placeholder {
+  color: var(--green-medium);
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.u-form-item .u-form-item__body, #register .u-form-item .u-form-item__body {
+  padding: 12px !important;
+  background: var(--white);
+  border-radius: 8px;
+  border: 2px solid var(--green-light);
+}
+
+.u-form-item__body {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0;
+}
+
+.u-form-item__body__left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.u-form-item__body__left__content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 8px;
+  flex: 1;
+}
+
+.u-form-item__body__left__content__icon {
+  margin-right: 3px;
+}
+
+.u-form-item__body__right input {
+  background-color: transparent;
+  height: 31px;
+  display: block;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: inherit;
+  color: var(--green-dark);
+  font-size: 16px;
+}
+
+.container .btn {
+  display: block;
+  text-align: center;
+  margin: 20px 30px 10px 30px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--green-medium), var(--green-accent)) !important;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 14px 0;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+  transition: all 0.3s ease;
+}
+
+.container .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(46, 125, 50, 0.4);
+}
+
+/* Estilo para lembrar senha */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  margin: 15px 0;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--green-medium);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--green-medium);
+}
+
+.forget-password {
+  color: var(--green-medium);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forget-password:hover {
+  color: var(--green-dark);
+  text-decoration: underline;
+}
+
+.container .form .btn-bottom {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--green-medium);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 10px 0;
+}
+
+.container .form .btn-bottom:hover {
+  color: var(--green-dark);
+}
+
+.guojia-list-item {
+  padding: 10px 0;
+  border-bottom: 1px var(--green-light) dashed;
+  color: var(--green-dark);
+  transition: all 0.2s ease;
+}
+
+.guojia-list-item:hover {
+  background-color: var(--green-lighter);
+  transform: translateX(5px);
+}
+
+/* Estilo para o cabeçalho fixo */
+div[style*="position:fixed"] {
+  background-color: var(--green-medium) !important;
+}
+
+/* Estilo para o link de suporte */
+span[style*="color:#f73131"] a {
+  filter: brightness(0) invert(1);
+}
+
+/* Estilo para o logo */
+.logo-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 45px;
+}
+
+.logo-container img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+  background-color: var(--white);
+}
+
+/* Estilo para o código do país */
+.country-code {
+  display: flex;
+  align-items: center;
+  color: var(--green-dark);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.country-code:hover {
+  background-color: var(--green-lighter);
+}
+
+/* Estilos personalizados para Toastify */
+.toastify {
+  background: rgba(0, 0, 0, 0.9) !important;
+  color: white !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 15px 20px !important;
+  min-height: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  text-align: center !important;
+  font-family: 'Arial', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  z-index: 9999 !important;
+}
+
+.toastify.toastify-top {
+  top: 0 !important;
+}
+
+.toastify.toastify-center {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.toastify.toastify-bottom {
+  bottom: 0 !important;
+}
+
+/* Remove o ícone padrão do Toastify */
+.toast-close {
+  color: white !important;
+  opacity: 0.7 !important;
+}
+
+.toast-close:hover {
+  opacity: 1 !important;
+}
+</style>
+</head>
+<body ontouchstart="">
+
+<div class="header-background"></div>
+
+<!-- Cabeçalho restaurado -->
+<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;background-color: var(--green-medium);"><span style="position:absolute;right:10px;font-size:14px;color:#fff;letter-spacing:1px;"><a target="_blank" href=" https://t.me/Ada8860"><img src="img/suporte.png" style="width:28px;height:28px;" /></a></span></div></div>
+
+<div style="text-align:center;">
+  <div class="logo-container">
+    <img src="img/logo1.jpg" alt="USHK">
+  </div>
+</div>
+
+<form id="myform" method="post" role="form" style="margin-top:50px;">
+<div class="container">
+    <div class="form">
+        <div class="u-form">
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="img/telefone.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                    <input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required>
+                                    <div class="country-code" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input id="user_name" name="user_name" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
+                    </div>
+                </div>
+            </div>
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="img/senha.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input value="" type="password" name="password" id="password" placeholder="Senha" required>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lembrar senha e Esqueci a senha -->
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    Lembrar senha
+                </label>
+                <a href="/forgot-password" class="forget-password">
+                    Esqueci a senha
+                </a>
+            </div>
+            
+            <a href="javascript:dosubmit();" class="btn" id="loginBtn">
+                Login
+            </a>
+            <a href="/register" class="btn-bottom">
+                Cadastrar-se
+            </a>
+        </div>
+    </div>
+</div>
+</form>
+
+<script>
+// Configuração da API
+const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+const TOKEN_EXPIRY_HOURS = 5;
+
+// Função para mostrar toast
+function showToast(message, type = 'info') {
+  Toastify({
+    text: message,
+    duration: 3000,
+    gravity: "top",
+    position: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    stopOnFocus: true,
+    className: type,
+    style: {
+      width: "100%",
+      left: "0",
+      right: "0",
+      borderRadius: "0",
+      textAlign: "center"
+    }
+  }).showToast();
+}
+
+// Função para seleção de código de área (apenas Angola)
+function quhao_select() {
+  layer.open({
+    type: 1,
+    content: '<div style="padding:0 10px;background-color: var(--green-lighter);"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(244)">+244</div></div></div>',
+    anim: 'up',
+    style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none; background-color: var(--green-lighter);'
+  });
+}
+
+function qhselect(quhao) {
+  quhao = quhao || $("#quhaose").val();
+  $("#area_code").html(quhao);
+  $("#area_codei").val(quhao);
+  layer.closeAll();
+}
+
+// Função para mostrar/ocultar loading (usando toast)
+function showLoading(show, message = 'Carregando...') {
+  if (show) {
+    showToast(message, 'info');
+  }
+}
+
+// Função para verificar se deve lembrar usuário
+function checkRememberMe() {
+  const rememberMe = localStorage.getItem('rememberMe');
+  const savedMobile = localStorage.getItem('user_mobile');
+  
+  if (rememberMe === 'true' && savedMobile) {
+    document.getElementById('user_name').value = savedMobile;
+    document.getElementById('remember').checked = true;
+  }
+}
+
+// Função para salvar preferência de lembrar senha
+function saveRememberPreference() {
+  const rememberCheckbox = document.getElementById('remember');
+  const userMobile = document.getElementById('user_name').value;
+  
+  if (rememberCheckbox.checked && userMobile) {
+    localStorage.setItem('rememberMe', 'true');
+    localStorage.setItem('user_mobile', userMobile);
+  } else {
+    localStorage.setItem('rememberMe', 'false');
+    localStorage.removeItem('user_mobile');
+  }
+}
+
+// Função principal de login
+async function dosubmit() {
+  const areaCode = $("#area_code").html();
+  const user_name = $("#user_name").val();
+  const password = $("#password").val();
+  
+  // Validações
+  if (!user_name) {
+    showToast('Digite o número de telefone', 'error');
+    return false;
+  }
+  
+  if (!password) {
+    showToast('Digite a senha', 'error');
+    return false;
+  }
+
+  // Salvar preferência de lembrar senha
+  saveRememberPreference();
+
+  // Combinar código do país com número de telefone
+  const mobile = areaCode + user_name;
+
+  showLoading(true, 'Fazendo login...');
+
+  try {
+    // Fazer requisição para a API de login
+    const response = await fetch(`${API_BASE_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        mobile: mobile,
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // Login bem-sucedido - Armazenar no localStorage com expiração
+      const tokenData = {
+        token: data.data.token,
+        expiry: Date.now() + (TOKEN_EXPIRY_HOURS * 60 * 60 * 1000) // 5 horas a partir de agora
+      };
+      
+      // Salvar no localStorage (sem cookies)
+      localStorage.setItem('user_token', JSON.stringify(tokenData));
+      localStorage.setItem('user_id', data.data.user.id);
+      
+      showToast('Login realizado com sucesso!', 'success');
+      
+      // Redirecionar após um breve delay
+      setTimeout(() => {
+        window.location.href = '/principal.html';
+      }, 1500);
+    } else {
+      showToast(data.message || 'Erro ao fazer login', 'error');
+    }
+  } catch (error) {
+    console.error('Erro no login:', error);
+    showToast('Erro de conexão com o servidor', 'error');
+  }
+}
+
+// Função para verificar se o token no localStorage ainda é válido
+function isTokenValid() {
+  const tokenData = localStorage.getItem('user_token');
+  
+  if (!tokenData) return false;
+  
+  try {
+    const { token, expiry } = JSON.parse(tokenData);
+    
+    // Verificar se o token expirou
+    if (Date.now() > expiry) {
+      // Token expirado, remover do localStorage
+      localStorage.removeItem('user_token');
+      localStorage.removeItem('user_id');
+      return false;
+    }
+    
+    return true;
+  } catch (e) {
+    console.error('Erro ao verificar token:', e);
+    return false;
+  }
+}
+
+// Verificar se já está logado ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+  // Verificar lembrar senha
+  checkRememberMe();
+  
+  // Verificar se há token válido no localStorage
+  if (isTokenValid()) {
+    // Se já tem token válido, redirecionar para dashboard
+    window.location.href = '/dashboard.html';
+  }
+  
+  // Tecla Enter para submeter o formulário (apenas se o campo existir)
+  const passwordField = document.getElementById('password');
+  if (passwordField) {
+    passwordField.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        dosubmit();
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil</title>
+    <script src="js/tailwindcss.js"></script>
+    <link href="js/fonts.googleapis.css" rel="stylesheet" />
+    <link href="js/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        .responsive-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        
+        .smaller-text {
+            font-size: 0.85rem;
+        }
+
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #494a49;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            max-width: 80%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+
+        .hidden {
+            display: none;
+        }
+        
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+    <div class="max-w-[500px] mx-auto min-h-screen pb-24">
+        <!-- Toast para mensagens -->
+        <div id="toast" class="toast hidden">
+            <p id="toast-message"></p>
+        </div>
+
+        <!-- Cabeçalho com informações do usuário -->
+        <div class="gradient-bg text-white px-4 pt-8 pb-6 rounded-b-3xl shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="relative w-16 h-16 flex-shrink-0">
+                    <img id="profile-img-preview" src="img/logo1.jpg" alt="Foto de Perfil" class="w-full h-full rounded-full object-cover border-2 border-white shadow">
+                </div>
+                <div class="min-w-0 flex-1">
+                    <p id="user-phone" class="text-sm font-medium responsive-text">Telefone: Carregando...</p>
+                    <p id="user-balance" class="text-xl font-bold">KZ 0,00</p>
+                </div>
+            </div>
+            
+            <!-- Cartão de status VIP -->
+            <div class="bg-white/20 backdrop-blur-sm rounded-xl p-3 mt-2">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs opacity-90">Status VIP</p>
+                        <p id="vip-level" class="text-sm font-semibold">VIP 0</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs opacity-90">Próximo nível</p>
+                        <p id="next-vip" class="text-sm font-semibold">KZ 5.000,00</p>
+                    </div>
+                </div>
+                <div class="w-full bg-white/30 rounded-full h-2 mt-2">
+                    <div id="vip-progress" class="bg-white h-2 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de botões Recarregar e Sacar -->
+        <div class="px-4 -mt-4 mb-4">
+            <div class="bg-white rounded-2xl p-4 shadow-lg">
+                <div class="flex gap-3">
+                    <a href="deposito.html" class="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
+                        Recarregar
+                    </a>
+                    <a href="retirada.html" class="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
+                        Sacar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nova Seção de Estatísticas -->
+        <div class="px-4 mb-4">
+            <div class="grid grid-cols-2 gap-3">
+                <!-- Linha 1 -->
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos de ontem</p>
+                        <p id="yesterday-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos de hoje</p>
+                        <p id="today-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                
+                <!-- Linha 2 -->
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos desta semana</p>
+                        <p id="week-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos deste mês</p>
+                        <p id="month-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                
+                <!-- Linha 3 -->
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Renda da equipe</p>
+                        <p id="team-income" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Receita total</p>
+                        <p id="total-income" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campo Crescimento -->
+            <div class="mt-4 text-center">
+                <div class="bg-white rounded-xl p-4 shadow card-hover">
+                    <p class="text-sm font-semibold text-green-800 mb-2">Crescimento</p>
+                    <div class="w-full bg-green-100 rounded-full h-3">
+                        <div id="growth-bar" class="bg-gradient-to-r from-green-500 to-emerald-600 h-3 rounded-full" style="width: 45%"></div>
+                    </div>
+                    <p id="growth-percentage" class="text-xs text-gray-600 mt-2">45% este mês</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartões de informações adicionais -->
+        <div class="px-4 mb-4">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-4 shadow card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs opacity-80 mb-1">Check-in Diário</p>
+                            <p id="checkin-status" class="text-sm font-semibold">Disponível</p>
+                        </div>
+                        <i class='bx bx-calendar-check text-xl'></i>
+                    </div>
+                    <button id="checkin-btn" class="mt-2 w-full bg-white text-green-600 py-1 rounded-lg text-xs font-semibold hover:bg-green-50 transition">
+                        Fazer Check-in
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-xl p-4 shadow card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs opacity-80 mb-1">Membros na Equipe</p>
+                            <p id="team-members" class="text-sm font-semibold">0</p>
+                        </div>
+                        <i class='bx bx-group text-xl'></i>
+                    </div>
+                    <a href="equipe.html" class="mt-2 block w-full bg-white text-green-600 py-1 rounded-lg text-xs font-semibold text-center hover:bg-green-50 transition">
+                        Ver Equipe
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartão de bônus e convite -->
+        <div class="px-4 mb-4">
+            <div class="bg-gradient-to-r from-green-400 to-emerald-500 text-white rounded-xl p-4 shadow card-hover">
+                <div class="flex items-center justify-between mb-2">
+                    <div>
+                        <p class="text-sm font-semibold">Bônus de Convite</p>
+                        <p class="text-xs opacity-80">Ganhe 1% em cada recarga</p>
+                    </div>
+                    <i class='bx bx-gift text-xl'></i>
+                </div>
+                <div class="bg-white/20 rounded-lg p-2 text-center">
+                    <p class="text-xs mb-1">Seu código de convite</p>
+                    <p id="invite-code" class="text-sm font-bold">CARREGANDO...</p>
+                </div>
+                <button onclick="copyInviteCode()" class="mt-2 w-full bg-white text-green-600 py-2 rounded-lg text-sm font-semibold hover:bg-green-50 transition">
+                    Copiar Código
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu de navegação rápida -->
+        <div class="px-4 mb-4">
+            <h3 class="text-lg font-bold text-green-800 mb-3">Acesso Rápido</h3>
+            <div class="grid grid-cols-4 gap-3 text-center">
+                <a href="renda.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-trending-up text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">Renda</p>
+                </a>
+                <a href="equipe.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-star text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">VIP</p>
+                </a>
+                <a href="iban.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-bank text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">Banco</p>
+                </a>
+                <a href="historicogeral.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-history text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">Histórico</p>
+                </a>
+            </div>
+        </div>
+
+       <!-- Menu de opções -->
+<div class="px-4 space-y-3 text-sm">
+  <a href="geral.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="img/historico.png" alt="Histórico" class="w-5 h-5">
+      <span>Histórico de Depósitos</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a href="historico-saques.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="img/historico.png" alt="Retirada" class="w-5 h-5">
+      <span>Histórico de Retiradas</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a href="iban.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Cartão" class="w-5 h-5">
+      <span>Número da Conta Bancária</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a href="seting.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Senha" class="w-5 h-5">
+      <span>Alterar Senha</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a target="_blank" href="online.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/3449/3449720.png" alt="Suporte" class="w-5 h-5">
+      <span>Serviço Online</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a href="#" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between opacity-50 cursor-not-allowed">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/3004/3004458.png" alt="App" class="w-5 h-5">
+      <span>Baixar App</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+</div>
+
+<!-- Botão de logout -->
+<div class="text-center mt-6">
+  <button onclick="logout()" class="text-gray-500 text-sm hover:text-green-600 transition">Terminar Sessão</button>
+</div>
+
+
+        <!-- Menu de navegação com ícones de imagem -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+  <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+    
+    <li>
+      <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+        <img src="img/home.png" alt="Início" class="w-6 h-6">
+        <span>Início</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+        <span>Renda</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+        <span>VIP</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+        <span>Bancária</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+        <span>Perfil</span>
+      </a>
+    </li>
+
+  </ul>
+</nav>
+    </div>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+
+        // Função para obter o token do localStorage
+        function getToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return null;
+            
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                // Verificar se o token expirou
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return null;
+                }
+                return token;
+            } catch (e) {
+                console.error('Erro ao obter token:', e);
+                return null;
+            }
+        }
+
+        // Função para mostrar toast
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
+            
+            // Cor de fundo baseada no tipo
+            if (type === 'success') {
+                toast.style.backgroundColor = '#10B981';
+            } else if (type === 'error') {
+                toast.style.backgroundColor = '#EF4444';
+            } else {
+                toast.style.backgroundColor = '#166534';
+            }
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Função para copiar código de convite
+        function copyInviteCode() {
+            const inviteCode = document.getElementById('invite-code').textContent;
+            if (inviteCode && inviteCode !== 'CARREGANDO...') {
+                navigator.clipboard.writeText(inviteCode).then(() => {
+                    showToast('Código copiado para a área de transferência!', 'success');
+                }).catch(err => {
+                    console.error('Erro ao copiar código: ', err);
+                    showToast('Erro ao copiar código', 'error');
+                });
+            }
+        }
+
+        // Função para fazer logout
+        async function logout() {
+            try {
+                const token = getToken();
+                if (!token) {
+                    // Se não há token, apenas redireciona
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                // Tentar fazer logout na API
+                const response = await fetch(`${API_BASE_URL}/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                // Independente da resposta da API, limpar localStorage e redirecionar
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                
+                showToast('Sessão terminada com sucesso', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Erro no logout:', error);
+                // Mesmo com erro, limpar localStorage e redirecionar
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Função para buscar dados do perfil
+        async function fetchProfileData() {
+            try {
+                const token = getToken();
+                if (!token) {
+                    showToast('Sessão expirada. Faça login novamente.', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                    return;
+                }
+
+                // Buscar dados do perfil
+                const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        showToast('Sessão expirada. Faça login novamente.', 'error');
+                        localStorage.removeItem('user_token');
+                        localStorage.removeItem('user_id');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 2000);
+                        return;
+                    }
+                    throw new Error('Erro ao carregar dados do perfil');
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateProfileUI(data.data);
+                } else {
+                    throw new Error(data.message || 'Erro ao carregar dados');
+                }
+
+            } catch (error) {
+                console.error('Erro ao buscar dados do perfil:', error);
+                showToast('Erro ao carregar dados: ' + error.message, 'error');
+            }
+        }
+
+        // Função para calcular ganhos baseado nas tarefas
+        async function calculateEarningsFromTasks() {
+            try {
+                const token = getToken();
+                if (!token) return;
+
+                // Buscar histórico de tarefas
+                const response = await fetch(`${API_BASE_URL}/api/tasks/history`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar histórico de tarefas');
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    const tasks = data.data.tasks || [];
+                    return calculateEarnings(tasks);
+                } else {
+                    throw new Error(data.message || 'Erro ao processar tarefas');
+                }
+
+            } catch (error) {
+                console.error('Erro ao calcular ganhos:', error);
+                // Retornar valores padrão em caso de erro
+                return {
+                    yesterday: 0,
+                    today: 0,
+                    week: 0,
+                    month: 0
+                };
+            }
+        }
+
+        // Função para calcular ganhos baseado nas datas das tarefas
+        function calculateEarnings(tasks) {
+            const now = new Date();
+            const yesterday = new Date(now);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            const weekAgo = new Date(now);
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            
+            const monthAgo = new Date(now);
+            monthAgo.setMonth(monthAgo.getMonth() - 1);
+
+            // Filtrar tarefas por período
+            const yesterdayTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate.toDateString() === yesterday.toDateString();
+            });
+
+            const todayTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate.toDateString() === now.toDateString();
+            });
+
+            const weekTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate >= weekAgo && taskDate <= now;
+            });
+
+            const monthTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate >= monthAgo && taskDate <= now;
+            });
+
+            // Calcular totais
+            const earnings = {
+                yesterday: yesterdayTasks.reduce((sum, task) => sum + (task.amount || 0), 0),
+                today: todayTasks.reduce((sum, task) => sum + (task.amount || 0), 0),
+                week: weekTasks.reduce((sum, task) => sum + (task.amount || 0), 0),
+                month: monthTasks.reduce((sum, task) => sum + (task.amount || 0), 0)
+            };
+
+            return earnings;
+        }
+
+        // Função para buscar dados da equipe
+        async function fetchTeamData() {
+            try {
+                const token = getToken();
+                if (!token) return;
+
+                const response = await fetch(`${API_BASE_URL}/api/team/statistics`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        updateTeamUI(data.data);
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao buscar dados da equipe:', error);
+            }
+        }
+
+        // Função para atualizar a UI com dados do perfil
+        function updateProfileUI(profileData) {
+            // Atualizar telefone do usuário
+            const userPhoneElement = document.getElementById('user-phone');
+            if (userPhoneElement) {
+                // Se não houver telefone no perfil, usar o ID como fallback
+                const phoneNumber = profileData.mobile || profileData.user_id || 'N/A';
+                userPhoneElement.textContent = `Telefone: ${phoneNumber}`;
+            }
+
+            // Atualizar saldo
+            const userBalanceElement = document.getElementById('user-balance');
+            if (userBalanceElement && profileData.wallet_balance !== undefined) {
+                userBalanceElement.textContent = `KZ ${formatCurrency(profileData.wallet_balance)}`;
+            }
+
+            // Atualizar código de convite se estiver disponível
+            const inviteCodeElement = document.getElementById('invite-code');
+            if (inviteCodeElement && profileData.invitation_code) {
+                inviteCodeElement.textContent = profileData.invitation_code;
+            }
+
+            // Atualizar nível VIP (simulação)
+            const vipLevelElement = document.getElementById('vip-level');
+            const nextVipElement = document.getElementById('next-vip');
+            const vipProgressElement = document.getElementById('vip-progress');
+            
+            if (vipLevelElement && nextVipElement && vipProgressElement) {
+                // Simulação de nível VIP baseado no saldo
+                const balance = profileData.wallet_balance || 0;
+                let vipLevel = 0;
+                let nextLevelAmount = 5000;
+                
+                if (balance >= 2000000) vipLevel = 10;
+                else if (balance >= 1300000) vipLevel = 9;
+                else if (balance >= 800000) vipLevel = 8;
+                else if (balance >= 500000) vipLevel = 7;
+                else if (balance >= 300000) vipLevel = 6;
+                else if (balance >= 150000) vipLevel = 5;
+                else if (balance >= 80000) vipLevel = 4;
+                else if (balance >= 30000) vipLevel = 3;
+                else if (balance >= 10000) vipLevel = 2;
+                else if (balance >= 5000) vipLevel = 1;
+                
+                vipLevelElement.textContent = `VIP ${vipLevel}`;
+                
+                // Calcular progresso para o próximo nível
+                if (vipLevel < 10) {
+                    const currentLevelMin = vipLevel === 0 ? 0 : 
+                                          vipLevel === 1 ? 5000 :
+                                          vipLevel === 2 ? 10000 :
+                                          vipLevel === 3 ? 30000 :
+                                          vipLevel === 4 ? 80000 :
+                                          vipLevel === 5 ? 150000 :
+                                          vipLevel === 6 ? 300000 :
+                                          vipLevel === 7 ? 500000 :
+                                          vipLevel === 8 ? 800000 :
+                                          vipLevel === 9 ? 1300000 : 0;
+                    
+                    nextLevelAmount = vipLevel === 0 ? 5000 :
+                                    vipLevel === 1 ? 10000 :
+                                    vipLevel === 2 ? 30000 :
+                                    vipLevel === 3 ? 80000 :
+                                    vipLevel === 4 ? 150000 :
+                                    vipLevel === 5 ? 300000 :
+                                    vipLevel === 6 ? 500000 :
+                                    vipLevel === 7 ? 800000 :
+                                    vipLevel === 8 ? 1300000 :
+                                    vipLevel === 9 ? 2000000 : 0;
+                    
+                    const progress = ((balance - currentLevelMin) / (nextLevelAmount - currentLevelMin)) * 100;
+                    vipProgressElement.style.width = `${Math.min(progress, 100)}%`;
+                    nextVipElement.textContent = `KZ ${formatCurrency(nextLevelAmount)}`;
+                } else {
+                    vipProgressElement.style.width = '100%';
+                    nextVipElement.textContent = 'Máximo';
+                }
+            }
+        }
+
+        // Função para atualizar estatísticas na UI
+        async function updateEarningsUI() {
+            try {
+                // Mostrar estado de carregamento
+                setEarningsLoading(true);
+                
+                // Calcular ganhos baseado nas tarefas
+                const earnings = await calculateEarningsFromTasks();
+                
+                // Atualizar ganhos de ontem
+                const yesterdayEarningsElement = document.getElementById('yesterday-earnings');
+                if (yesterdayEarningsElement) {
+                    yesterdayEarningsElement.textContent = `KZ ${formatCurrency(earnings.yesterday)}`;
+                    yesterdayEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar ganhos de hoje
+                const todayEarningsElement = document.getElementById('today-earnings');
+                if (todayEarningsElement) {
+                    todayEarningsElement.textContent = `KZ ${formatCurrency(earnings.today)}`;
+                    todayEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar ganhos da semana
+                const weekEarningsElement = document.getElementById('week-earnings');
+                if (weekEarningsElement) {
+                    weekEarningsElement.textContent = `KZ ${formatCurrency(earnings.week)}`;
+                    weekEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar ganhos do mês
+                const monthEarningsElement = document.getElementById('month-earnings');
+                if (monthEarningsElement) {
+                    monthEarningsElement.textContent = `KZ ${formatCurrency(earnings.month)}`;
+                    monthEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar barra de crescimento baseado nos ganhos do mês
+                const growthBarElement = document.getElementById('growth-bar');
+                const growthPercentageElement = document.getElementById('growth-percentage');
+                if (growthBarElement && growthPercentageElement) {
+                    const growthPercentage = Math.min(100, Math.max(0, (earnings.month / 10000) * 100));
+                    growthBarElement.style.width = `${growthPercentage}%`;
+                    growthPercentageElement.textContent = `${Math.round(growthPercentage)}% este mês`;
+                }
+
+            } catch (error) {
+                console.error('Erro ao atualizar ganhos:', error);
+                // Em caso de erro, definir valores como zero
+                resetEarningsToZero();
+            }
+        }
+
+        // Função para definir estado de carregamento dos ganhos
+        function setEarningsLoading(loading) {
+            const earningsElements = [
+                'yesterday-earnings',
+                'today-earnings', 
+                'week-earnings',
+                'month-earnings',
+                'team-income',
+                'total-income'
+            ];
+
+            earningsElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (loading) {
+                        element.classList.add('loading');
+                    } else {
+                        element.classList.remove('loading');
+                    }
+                }
+            });
+        }
+
+        // Função para resetar ganhos para zero em caso de erro
+        function resetEarningsToZero() {
+            const earningsElements = [
+                'yesterday-earnings',
+                'today-earnings', 
+                'week-earnings',
+                'month-earnings'
+            ];
+
+            earningsElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = 'KZ 0,00';
+                    element.classList.remove('loading');
+                }
+            });
+        }
+
+        // Função para atualizar dados da equipe
+        function updateTeamUI(teamData) {
+            // Atualizar membros da equipe
+            const teamMembersElement = document.getElementById('team-members');
+            if (teamMembersElement && teamData.team_overview) {
+                teamMembersElement.textContent = teamData.team_overview.people_added || 0;
+            }
+
+            // Atualizar renda da equipe se disponível
+            const teamIncomeElement = document.getElementById('team-income');
+            if (teamIncomeElement && teamData.income_analysis) {
+                teamIncomeElement.textContent = `KZ ${formatCurrency(teamData.income_analysis.valid_withdrawal || 0)}`;
+                teamIncomeElement.classList.remove('loading');
+            }
+
+            // Atualizar receita total
+            const totalIncomeElement = document.getElementById('total-income');
+            if (totalIncomeElement) {
+                // Calcular receita total (ganhos do mês + renda da equipe)
+                const monthEarnings = parseFloat(document.getElementById('month-earnings')?.textContent?.replace('KZ ', '').replace('.', '').replace(',', '.') || 0);
+                const teamIncome = parseFloat(teamIncomeElement.textContent?.replace('KZ ', '').replace('.', '').replace(',', '.') || 0);
+                const totalIncome = monthEarnings + teamIncome;
+                
+                totalIncomeElement.textContent = `KZ ${formatCurrency(totalIncome)}`;
+                totalIncomeElement.classList.remove('loading');
+            }
+        }
+
+        // Função para formatar valores monetários
+        function formatCurrency(value) {
+            if (typeof value !== 'number') {
+                value = parseFloat(value) || 0;
+            }
+            return value.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Função para verificar autenticação e carregar dados
+        function initializePage() {
+            const token = getToken();
+            
+            if (!token) {
+                showToast('Sessão expirada. Redirecionando para login...', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            // Carregar dados do perfil
+            fetchProfileData();
+            
+            // Carregar e calcular ganhos das tarefas
+            updateEarningsUI();
+            
+            // Carregar dados da equipe
+            fetchTeamData();
+        }
+
+        // Inicializar a página quando carregada
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+            
+            // Adicionar animação de entrada
+            const elements = document.querySelectorAll('.bg-white, .card-hover');
+            elements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+                element.classList.add('animate-slide-up');
+            });
+            
+            // Adicionar evento de check-in
+            const checkinBtn = document.getElementById('checkin-btn');
+            if (checkinBtn) {
+                checkinBtn.addEventListener('click', async function() {
+                    try {
+                        const token = getToken();
+                        if (!token) return;
+
+                        const response = await fetch(`${API_BASE_URL}/api/tasks/daily-checkin`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.success) {
+                                showToast('Check-in realizado! +5 KZ adicionados', 'success');
+                                checkinBtn.disabled = true;
+                                checkinBtn.textContent = 'Concluído';
+                                
+                                // Atualizar saldo
+                                const balanceElement = document.getElementById('user-balance');
+                                if (balanceElement) {
+                                    balanceElement.textContent = `KZ ${formatCurrency(data.data.new_balance)}`;
+                                }
+                                
+                                // Recarregar ganhos
+                                updateEarningsUI();
+                            }
+                        } else {
+                            showToast('Erro ao fazer check-in', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Erro no check-in:', error);
+                        showToast('Erro ao fazer check-in', 'error');
+                    }
+                });
+            }
+        });
+
+        // Prevenir comportamento padrão dos links se necessário
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saque - USHK</title>
+    <script src="js/tailwindcss.js"></script>
+    <link href="js/fonts.googleapis.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            max-width: 80%;
+        }
+        
+        .toast-success {
+            background-color: #000;
+            border-left: 4px solid #10B981;
+        }
+        
+        .toast-error {
+            background-color: #000;
+            border-left: 4px solid #EF4444;
+        }
+        
+        .toast-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Cores de futebol - verde e branco */
+        .bg-futebol-green {
+            background-color: #16a34a; /* Verde mais vibrante */
+        }
+        
+        .bg-futebol-white {
+            background-color: #ffffff;
+        }
+        
+        .text-futebol-green {
+            color: #16a34a;
+        }
+        
+        .border-futebol-green {
+            border-color: #16a34a;
+        }
+        
+        .gradient-futebol {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+    <div class="max-w-md mx-auto pb-24">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-slate-200">
+        <a href="javascript:history.back()" class="text-slate-500 text-xl font-bold">&#8592;</a>
+
+            <h1 class="text-lg font-bold text-green-800 tracking-tight">Área de Saque</h1>
+            <a href="historico-saques.html" class="text-green-600 hover:text-green-700 transition-colors" title="Histórico de Saques">
+                <i class='bx bx-history text-2xl'></i>
+            </a>
+        </header>
+
+        <!-- Cartão de saldo -->
+        <section class="px-5 mt-6">
+            <div class="rounded-2xl gradient-futebol text-white p-5 flex items-center justify-between shadow-lg">
+                <div>
+                    <p class="text-sm opacity-90 mb-1">Saldo disponível</p>
+                    <p id="saldoDisponivel" class="text-2xl font-bold">KZ0.00</p>
+                </div>
+                <img src="https://i.postimg.cc/Gh68ttSY/saldo.png" alt="Saldo" class="w-10 h-10">
+            </div>
+        </section>
+
+        <!-- Formulário de Saque -->
+        <section class="px-5 mt-8">
+            <form id="formSaque" class="space-y-5">
+                <div>
+                    <label for="contaBancaria" class="text-sm font-medium text-green-800 block mb-1">Conta Bancária</label>
+                    <select id="contaBancaria" name="bank_account" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required>
+                        <option value="" disabled selected>Selecione sua conta</option>
+                        <!-- Opções serão preenchidas via JavaScript -->
+                    </select>
+                </div>
+
+                <div>
+                    <label for="valorSaque" class="text-sm font-medium text-green-800 block mb-1">Valor a sacar</label>
+                    <div class="flex items-center bg-white border border-green-300 rounded-lg px-3 py-2 focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-200 transition">
+                        <span class="text-green-600 font-semibold mr-2">KZ</span>
+                        <input id="valorSaque" name="amount" type="text" placeholder="0,00" class="w-full bg-transparent outline-none placeholder-green-400" oninput="formatarMoeda(this)" required />
+                    </div>
+                    <p class="text-xs text-red-500 mt-2">Taxa de saque: 20% (Será descontado automaticamente).</p>
+                    <p id="valorLiquido" class="text-xs text-green-600 mt-1 hidden">Valor líquido: KZ0.00</p>
+                </div>
+
+                <button id="btnSaque" type="submit" class="w-full gradient-futebol hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-[1.02] active:scale-[0.98]">
+                    Sacar Agora
+                </button>
+            </form>
+
+            <div class="mt-6 text-xs text-green-700 leading-relaxed space-y-3 bg-white p-4 rounded-xl border border-green-200">
+                <h2 class="text-sm font-bold text-green-800 mb-3">Informações de Retirada</h2>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Valor do Saque:</strong> Deve estar entre <strong class="text-green-600">KZ1,200.00</strong> e <strong class="text-green-600">KZ2,000,000.00</strong>.</p>
+                </div>
+
+               <div class="flex items-start gap-2">
+    <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
+    <p><strong>Horário de Retiradas:</strong> De <strong class="text-green-600">segunda a sexta-feira</strong>, das <strong class="text-green-600">11h30 às 15h30</strong>.</p>
+</div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Limite Diário:</strong> Apenas <strong class="text-green-600">um saque por dia</strong> deves realizar.</p>
+                </div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-spin mt-1"></div>
+                    <p><strong>Prazo de Recebimento:</strong> De <strong class="text-green-600">20 minutos à 24h</strong> após a solicitação.</p>
+                </div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
+                    <p><strong>Taxa de Saque:</strong> <strong class="text-green-600">20%</strong> sobre o valor solicitado.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification Template -->
+    <div id="toast-template" class="toast hidden">
+        <i class='bx toast-icon'></i>
+        <div class="toast-message"></div>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+      <!-- Menu de navegação com ícones de imagem -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+        
+        <li>
+          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+            <img src="img/home.png" alt="Início" class="w-6 h-6">
+            <span>Início</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+            <span>Renda</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+            <span>VIP</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+            <span>Bancária</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+            <span>Perfil</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+
+        // Função para obter o token do usuário
+        function getUserToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return null;
+            
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return null;
+                }
+                return token;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Função para obter o ID do usuário
+        function getUserId() {
+            return localStorage.getItem('user_id');
+        }
+
+        // Toast personalizado
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast-template');
+            const newToast = toast.cloneNode(true);
+            
+            newToast.classList.remove('hidden');
+            newToast.classList.add(type === 'success' ? 'toast-success' : type === 'error' ? 'toast-error' : 'toast');
+            
+            const icon = newToast.querySelector('.toast-icon');
+            const messageDiv = newToast.querySelector('.toast-message');
+            
+            if (type === 'success') {
+                icon.className = 'bx bx-check-circle toast-icon';
+            } else if (type === 'error') {
+                icon.className = 'bx bx-error toast-icon';
+            } else {
+                icon.className = 'bx bx-info-circle toast-icon';
+            }
+            
+            messageDiv.textContent = message;
+            document.body.appendChild(newToast);
+            
+            setTimeout(() => {
+                newToast.remove();
+            }, 3000);
+        }
+
+        // Carregar dados do usuário
+        async function loadUserData() {
+            const token = getUserToken();
+            const userId = getUserId();
+            
+            if (!token || !userId) {
+                showToast('Faça login para continuar', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            try {
+                // Carregar perfil do usuário
+                const profileResponse = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!profileResponse.ok) {
+                    throw new Error('Erro ao carregar dados do usuário');
+                }
+
+                const profileData = await profileResponse.json();
+                
+                if (profileData.success) {
+                    // Atualizar saldo
+                    document.getElementById('saldoDisponivel').textContent = `KZ${profileData.data.wallet_balance.toLocaleString('pt-BR')}`;
+                }
+
+                // Carregar contas bancárias
+                await loadBankAccounts(token);
+
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                showToast('Erro ao carregar dados', 'error');
+            }
+        }
+
+        // Carregar contas bancárias
+        async function loadBankAccounts(token) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const select = document.getElementById('contaBancaria');
+                    
+                    if (data.success && data.data) {
+                        // Limpar opções existentes (exceto a primeira)
+                        while (select.children.length > 1) {
+                            select.removeChild(select.lastChild);
+                        }
+                        
+                        // Adicionar conta bancária
+                        const option = document.createElement('option');
+                        option.value = data.data.id;
+                        option.textContent = `${data.data.bank_name} - ${data.data.account_holder} (${data.data.account_number})`;
+                        select.appendChild(option);
+                    } else {
+                        // Se não tiver conta cadastrada
+                        const option = document.createElement('option');
+                        option.value = '';
+                        option.textContent = 'Nenhuma conta cadastrada';
+                        option.disabled = true;
+                        select.appendChild(option);
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar contas bancárias:', error);
+            }
+        }
+
+        // Verificar se usuário já sacou hoje
+        async function checkDailyWithdrawal(token) {
+            try {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                const response = await fetch(`${API_BASE_URL}/api/withdrawals`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        const todayWithdrawals = data.data.withdrawals.filter(withdrawal => {
+                            const withdrawalDate = new Date(withdrawal.created_at);
+                            withdrawalDate.setHours(0, 0, 0, 0);
+                            return withdrawalDate.getTime() === today.getTime();
+                        });
+                        
+                        return todayWithdrawals.length > 0;
+                    }
+                }
+                return false;
+            } catch (error) {
+                console.error('Erro ao verificar saques diários:', error);
+                return false;
+            }
+        }
+
+        // Formatar moeda
+        function formatarMoeda(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = (value / 100).toFixed(2);
+            value = value.replace('.', ',');
+            value = value.replace(/(\d)(?=(\d{3})+\,)/g, '$1.');
+            
+            input.value = value;
+            
+            // Calcular valor líquido
+            calcularValorLiquido();
+        }
+
+        // Calcular valor líquido após taxa
+        function calcularValorLiquido() {
+            const valorSaque = document.getElementById('valorSaque');
+            const valorLiquido = document.getElementById('valorLiquido');
+            
+            let valor = parseFloat(valorSaque.value.replace(/\./g, '').replace(',', '.'));
+            
+            if (!isNaN(valor) && valor > 0) {
+                const taxa = valor * 0.20; // 20% de taxa
+                const liquido = valor - taxa;
+                
+                valorLiquido.textContent = `Valor líquido: KZ${liquido.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                valorLiquido.classList.remove('hidden');
+            } else {
+                valorLiquido.classList.add('hidden');
+            }
+        }
+
+        // Validar horário de saque (segunda a sábado, 10h30 às 17h)
+        // Validar horário de saque (segunda a sexta, 11h30 às 15h30)
+function validarHorarioSaque() {
+    const agora = new Date();
+    const diaSemana = agora.getDay(); // 0 = domingo, 1 = segunda, ..., 6 = sábado
+    const hora = agora.getHours();
+    const minutos = agora.getMinutes();
+    
+    // Apenas segunda a sexta (1 a 5)
+    if (diaSemana === 0 || diaSemana === 6) { // Domingo (0) e Sábado (6)
+        return false;
+    }
+    
+    // Segunda a sexta: apenas das 11h30 às 15h30
+    const horaAtual = hora + (minutos / 60);
+    const horaInicio = 11.5; // 11h30
+    const horaFim = 15.5; // 15h30
+    
+    if (horaAtual < horaInicio || horaAtual >= horaFim) {
+        return false;
+    }
+    
+    return true;
+}
+        // Processar saque
+        async function processarSaque(event) {
+            event.preventDefault();
+            
+            const token = getUserToken();
+            if (!token) {
+                showToast('Faça login para continuar', 'error');
+                return;
+            }
+
+            // Validar horário
+            if (!validarHorarioSaque()) {
+                showToast('Saques disponíveis apenas de segunda a sexta, das 11h30 às 15h30', 'error');
+                return;
+            }
+
+            // Verificar se já sacou hoje
+            const jaSacouHoje = await checkDailyWithdrawal(token);
+            if (jaSacouHoje) {
+                showToast('Você já realizou um saque hoje. Volte amanhã!', 'error');
+                return;
+            }
+
+            const valorSaque = document.getElementById('valorSaque');
+            const contaBancaria = document.getElementById('contaBancaria');
+            
+            let valor = parseFloat(valorSaque.value.replace(/\./g, '').replace(',', '.'));
+            
+            // Validar valor mínimo e máximo
+            if (valor < 1200) {
+                showToast('Valor mínimo para saque é KZ 1.200,00', 'error');
+                return;
+            }
+            
+            if (valor > 2000000) {
+                showToast('Valor máximo para saque é KZ 2.000.000,00', 'error');
+                return;
+            }
+
+            // Verificar saldo
+            const saldoAtual = parseFloat(document.getElementById('saldoDisponivel').textContent.replace('KZ', '').replace(/\./g, '').replace(',', '.'));
+            if (valor > saldoAtual) {
+                showToast('Saldo insuficiente para realizar o saque', 'error');
+                return;
+            }
+
+            // Calcular taxa e valor líquido
+            const taxa = valor * 0.20; // 20% de taxa
+            const valorLiquido = valor - taxa;
+
+            // Desabilitar botão e mostrar loading
+            const btnSaque = document.getElementById('btnSaque');
+            btnSaque.disabled = true;
+            btnSaque.innerHTML = '<div class="loading-spinner"></div> Processando...';
+
+            try {
+                // Buscar informações da conta bancária
+                const bankResponse = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!bankResponse.ok) {
+                    throw new Error('Erro ao buscar informações da conta bancária');
+                }
+
+                const bankData = await bankResponse.json();
+                
+                if (!bankData.success || !bankData.data) {
+                    showToast('Cadastre uma conta bancária antes de sacar', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'iban.html';
+                    }, 2000);
+                    return;
+                }
+
+                const bankAccount = bankData.data;
+
+                // Enviar solicitação de saque
+                const response = await fetch(`${API_BASE_URL}/api/withdraw`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount: valor,
+                        tax: taxa,
+                        net_amount: valorLiquido,
+                        account_name: bankAccount.account_holder,
+                        iban: bankAccount.account_number,
+                        bank_name: bankAccount.bank_name,
+                        bank_code: bankAccount.branch_code
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast('Saque solicitado com sucesso!', 'success');
+                    
+                    // Atualizar saldo
+                    await loadUserData();
+                    
+                    // Limpar formulário
+                    document.getElementById('formSaque').reset();
+                    document.getElementById('valorLiquido').classList.add('hidden');
+                    
+                    // Redirecionar para histórico após 2 segundos
+                    setTimeout(() => {
+                        window.location.href = 'historico-saques.html';
+                    }, 2000);
+                } else {
+                    showToast(data.message || 'Erro ao processar saque', 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro no saque:', error);
+                showToast('Erro de conexão: ' + error.message, 'error');
+            } finally {
+                // Reabilitar botão
+                btnSaque.disabled = false;
+                btnSaque.textContent = 'Sacar Agora';
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar dados do usuário
+            loadUserData();
+            
+            // Event listener para o formulário de saque
+            const formSaque = document.getElementById('formSaque');
+            if (formSaque) {
+                formSaque.addEventListener('submit', processarSaque);
+            }
+            
+            // Event listener para input do valor
+            const valorSaque = document.getElementById('valorSaque');
+            if (valorSaque) {
+                valorSaque.addEventListener('input', calcularValorLiquido);
+            }
+        });
+
+        // Verificar autenticação
+        function checkAuth() {
+            const token = getUserToken();
+            if (!token) {
+                window.location.href = 'index.html';
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

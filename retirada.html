@@ -30,7 +30,7 @@
         
         .toast-success {
             background-color: #000;
-            border-left: 4px solid #f59e0b;
+            border-left: 4px solid #f97316;
         }
         
         .toast-error {
@@ -57,49 +57,112 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Cores de futebol - verde e branco */
-        .bg-futebol-green {
-            background-color: #16a34a; /* Verde mais vibrante */
+        /* Cores de fruta laranja - tons naturais */
+        .bg-orange-fruit {
+            background-color: #f97316;
         }
         
-        .bg-futebol-white {
+        .bg-orange-white {
             background-color: #ffffff;
         }
         
-        .text-futebol-green {
-            color: #16a34a;
+        .text-orange-fruit {
+            color: #f97316;
         }
         
-        .border-futebol-green {
-            border-color: #16a34a;
+        .border-orange-fruit {
+            border-color: #f97316;
         }
         
-        .gradient-futebol {
-            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+        .gradient-orange {
+            background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+        }
+        
+        .border-orange-light {
+            border-color: #fed7aa;
+        }
+        
+        .text-orange-dark {
+            color: #9a3412;
+        }
+        
+        .bg-orange-light {
+            background-color: #ffedd5;
+        }
+        
+        .border-orange-medium {
+            border-color: #fdba74;
+        }
+        
+        /* Efeito de casca de laranja */
+        .orange-peel-effect {
+            background: linear-gradient(135deg, #ea580c 0%, #fb923c 50%, #fbbf24 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .orange-peel-effect::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2%, transparent 3%),
+                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 2%, transparent 3%),
+                radial-gradient(circle at 25% 75%, rgba(255,255,255,0.1) 2%, transparent 3%),
+                radial-gradient(circle at 75% 25%, rgba(255,255,255,0.1) 2%, transparent 3%);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        
+        /* Gota de suco de laranja */
+        .orange-drop {
+            position: relative;
+        }
+        
+        .orange-drop::after {
+            content: "🍊";
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 20px;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
     </style>
 </head>
 
-<body class="bg-yellow-50 text-neutral-900 min-h-screen font-sans">
+<body class="bg-orange-50 text-neutral-900 min-h-screen font-sans">
     <div class="max-w-md mx-auto pb-24">
         <!-- Header -->
-        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-slate-200">
-        <a href="javascript:history.back()" class="text-slate-500 text-xl font-bold">&#8592;</a>
+        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-orange-100">
+            <a href="javascript:history.back()" class="text-orange-600 text-xl font-bold">&#8592;</a>
 
-            <h1 class="text-lg font-bold text-yellow-800 tracking-tight">Área de Saque</h1>
-            <a href="historico-saques.html" class="text-yellow-600 hover:text-yellow-700 transition-colors" title="Histórico de Saques">
+            <h1 class="text-lg font-bold text-orange-800 tracking-tight flex items-center gap-2">
+                <span class="text-2xl">🍊</span> Área de Saque
+            </h1>
+            <a href="historico-saques.html" class="text-orange-600 hover:text-orange-700 transition-colors" title="Histórico de Saques">
                 <i class='bx bx-history text-2xl'></i>
             </a>
         </header>
 
         <!-- Cartão de saldo -->
         <section class="px-5 mt-6">
-            <div class="rounded-2xl gradient-futebol text-white p-5 flex items-center justify-between shadow-lg">
+            <div class="rounded-2xl gradient-orange text-white p-5 flex items-center justify-between shadow-lg orange-peel-effect">
                 <div>
                     <p class="text-sm opacity-90 mb-1">Saldo disponível</p>
                     <p id="saldoDisponivel" class="text-2xl font-bold">KZ0.00</p>
                 </div>
-                <img src="https://i.postimg.cc/Gh68ttSY/saldo.png" alt="Saldo" class="w-10 h-10">
+                <div class="orange-drop">
+                    <img src="https://i.postimg.cc/Gh68ttSY/saldo.png" alt="Saldo" class="w-10 h-10">
+                </div>
             </div>
         </section>
 
@@ -107,54 +170,70 @@
         <section class="px-5 mt-8">
             <form id="formSaque" class="space-y-5">
                 <div>
-                    <label for="contaBancaria" class="text-sm font-medium text-yellow-800 block mb-1">Conta Bancária</label>
-                    <select id="contaBancaria" name="bank_account" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required>
+                    <label for="contaBancaria" class="text-sm font-medium text-orange-800 block mb-1 flex items-center gap-1">
+                        <span>🏦</span> Conta Bancária
+                    </label>
+                    <select id="contaBancaria" name="bank_account" class="w-full border border-orange-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition" required>
                         <option value="" disabled selected>Selecione sua conta</option>
                         <!-- Opções serão preenchidas via JavaScript -->
                     </select>
                 </div>
 
                 <div>
-                    <label for="valorSaque" class="text-sm font-medium text-yellow-800 block mb-1">Valor a sacar</label>
-                    <div class="flex items-center bg-white border border-green-300 rounded-lg px-3 py-2 focus-within:border-green-500 focus-within:ring-2 focus-within:ring-green-200 transition">
-                        <span class="text-yellow-600 font-semibold mr-2">KZ</span>
-                        <input id="valorSaque" name="amount" type="text" placeholder="0,00" class="w-full bg-transparent outline-none placeholder-green-400" oninput="formatarMoeda(this)" required />
+                    <label for="valorSaque" class="text-sm font-medium text-orange-800 block mb-1 flex items-center gap-1">
+                        <span>💰</span> Valor a sacar
+                    </label>
+                    <div class="flex items-center bg-white border border-orange-300 rounded-lg px-3 py-2 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-200 transition">
+                        <span class="text-orange-600 font-semibold mr-2">KZ</span>
+                        <input id="valorSaque" name="amount" type="text" placeholder="0,00" class="w-full bg-transparent outline-none placeholder-orange-400" oninput="formatarMoeda(this)" required />
                     </div>
-                    <p class="text-xs text-red-500 mt-2">Taxa de saque: 20% (Será descontado automaticamente).</p>
-                    <p id="valorLiquido" class="text-xs text-yellow-600 mt-1 hidden">Valor líquido: KZ0.00</p>
+                    <p class="text-xs text-red-500 mt-2 flex items-center gap-1">
+                        <span>⚠️</span> Taxa de saque: 20% (Será descontado automaticamente).
+                    </p>
+                    <p id="valorLiquido" class="text-xs text-orange-600 mt-1 hidden flex items-center gap-1">
+                        <span>💧</span> Valor líquido: KZ0.00
+                    </p>
                 </div>
 
-                <button id="btnSaque" type="submit" class="w-full gradient-futebol hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-[1.02] active:scale-[0.98]">
-                    Sacar Agora
+                <button id="btnSaque" type="submit" class="w-full gradient-orange hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
+                    <span>🍊</span> Sacar Agora
                 </button>
             </form>
 
-            <div class="mt-6 text-xs text-green-700 leading-relaxed space-y-3 bg-white p-4 rounded-xl border border-green-200">
-                <h2 class="text-sm font-bold text-yellow-800 mb-3">Informações de Retirada</h2>
+            <div class="mt-6 text-xs text-orange-700 leading-relaxed space-y-3 bg-white p-4 rounded-xl border border-orange-200">
+                <h2 class="text-sm font-bold text-orange-800 mb-3 flex items-center gap-2">
+                    <span class="text-lg">📋</span> Informações de Retirada
+                </h2>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
-                    <p><strong>Valor do Saque:</strong> Deve estar entre <strong class="text-yellow-600">KZ1,200.00</strong> e <strong class="text-yellow-600">KZ2,000,000.00</strong>.</p>
-                </div>
-
-               <div class="flex items-start gap-2">
-    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce mt-1"></div>
-    <p><strong>Horário de Retiradas:</strong> De <strong class="text-yellow-600">segunda a sexta-feira</strong>, das <strong class="text-yellow-600">11h30 às 15h30</strong>.</p>
-</div>
-
-                <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
-                    <p><strong>Limite Diário:</strong> Apenas <strong class="text-yellow-600">um saque por dia</strong> deves realizar.</p>
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Valor do Saque:</strong> Deve estar entre <strong class="text-orange-600">KZ1,200.00</strong> e <strong class="text-orange-600">KZ2,000,000.00</strong>.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-spin mt-1"></div>
-                    <p><strong>Prazo de Recebimento:</strong> De <strong class="text-yellow-600">20 minutos à 24h</strong> após a solicitação.</p>
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-bounce mt-1"></div>
+                    <p><strong>Horário de Retiradas:</strong> De <strong class="text-orange-600">segunda a sexta-feira</strong>, das <strong class="text-orange-600">11h30 às 15h30</strong>.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce mt-1"></div>
-                    <p><strong>Taxa de Saque:</strong> <strong class="text-yellow-600">20%</strong> sobre o valor solicitado.</p>
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Limite Diário:</strong> Apenas <strong class="text-orange-600">um saque por dia</strong> deves realizar.</p>
+                </div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-spin mt-1"></div>
+                    <p><strong>Prazo de Recebimento:</strong> De <strong class="text-orange-600">20 minutos à 24h</strong> após a solicitação.</p>
+                </div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-orange-500 rounded-full animate-bounce mt-1"></div>
+                    <p><strong>Taxa de Saque:</strong> <strong class="text-orange-600">20%</strong> sobre o valor solicitado.</p>
+                </div>
+                
+                <div class="mt-3 pt-3 border-t border-orange-100 text-center">
+                    <p class="text-orange-500 flex items-center justify-center gap-1">
+                        <span class="text-lg">💡</span> Dica: Seu saque será processado como suco fresco!
+                    </p>
                 </div>
             </div>
         </section>
@@ -168,48 +247,45 @@
 
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-      <!-- Menu de navegação com ícones de imagem -->
-        <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-yellow-100 rounded-t-2xl overflow-hidden">
-            <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 text-white text-xs">
-        
-        <li>
-          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
-            <img src="img/home.png" alt="Início" class="w-6 h-6">
-            <span>Início</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
-            <span>Renda</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
-            <span>VIP</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
-            <span>Bancária</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
-            <span>Perfil</span>
-          </a>
-        </li>
-
-      </ul>
+    <!-- Menu de navegação com tema de laranja -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-orange-100 rounded-t-2xl overflow-hidden">
+        <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white text-xs">
+            <li>
+                <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+                    <img src="img/home.png" alt="Início" class="w-6 h-6">
+                    <span>Início</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+                    <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+                    <span>Renda</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+                    <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+                    <span>VIP</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+                    <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+                    <span>Bancária</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+                    <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+                    <span>Perfil</span>
+                </a>
+            </li>
+        </ul>
     </nav>
-
 
     <script>
         // Configuração da API
@@ -406,30 +482,30 @@
             }
         }
 
-        // Validar horário de saque (segunda a sábado, 10h30 às 17h)
         // Validar horário de saque (segunda a sexta, 11h30 às 15h30)
-function validarHorarioSaque() {
-    const agora = new Date();
-    const diaSemana = agora.getDay(); // 0 = domingo, 1 = segunda, ..., 6 = sábado
-    const hora = agora.getHours();
-    const minutos = agora.getMinutes();
-    
-    // Apenas segunda a sexta (1 a 5)
-    if (diaSemana === 0 || diaSemana === 6) { // Domingo (0) e Sábado (6)
-        return false;
-    }
-    
-    // Segunda a sexta: apenas das 11h30 às 15h30
-    const horaAtual = hora + (minutos / 60);
-    const horaInicio = 11.5; // 11h30
-    const horaFim = 15.5; // 15h30
-    
-    if (horaAtual < horaInicio || horaAtual >= horaFim) {
-        return false;
-    }
-    
-    return true;
-}
+        function validarHorarioSaque() {
+            const agora = new Date();
+            const diaSemana = agora.getDay(); // 0 = domingo, 1 = segunda, ..., 6 = sábado
+            const hora = agora.getHours();
+            const minutos = agora.getMinutes();
+            
+            // Apenas segunda a sexta (1 a 5)
+            if (diaSemana === 0 || diaSemana === 6) { // Domingo (0) e Sábado (6)
+                return false;
+            }
+            
+            // Segunda a sexta: apenas das 11h30 às 15h30
+            const horaAtual = hora + (minutos / 60);
+            const horaInicio = 11.5; // 11h30
+            const horaFim = 15.5; // 15h30
+            
+            if (horaAtual < horaInicio || horaAtual >= horaFim) {
+                return false;
+            }
+            
+            return true;
+        }
+        
         // Processar saque
         async function processarSaque(event) {
             event.preventDefault();
@@ -530,7 +606,7 @@ function validarHorarioSaque() {
                 const data = await response.json();
 
                 if (data.success) {
-                    showToast('Saque solicitado com sucesso!', 'success');
+                    showToast('Saque solicitado com sucesso! 🍊', 'success');
                     
                     // Atualizar saldo
                     await loadUserData();

@@ -250,109 +250,109 @@
       // Configuração da API
       const API_BASE_URL = 'https://bd-p4q7.onrender.com';
       
-      // Dados dos produtos atualizados com os planos BIOCICLE e imagens numeradas
-      const productsData = [
-        {
-          id: 1,
-          name: "BIOCICLE 1",
-          image: "img/produto1.png",
-          price: 2500,
-          dailyReturn: 500,
-          totalReturn: 45000,
-          period: 90,
-          bonusLevel: 1
-        },
-        {
-          id: 2,
-          name: "BIOCICLE 2",
-          image: "img/produto1.png",
-          price: 5000,
-          dailyReturn: 1000,
-          totalReturn: 90000,
-          period: 90,
-          bonusLevel: 1
-        },
-        {
-          id: 3,
-          name: "BIOCICLE 3",
-          image: "img/produto1.png",
-          price: 10000,
-          dailyReturn: 2000,
-          totalReturn: 180000,
-          period: 90,
-          bonusLevel: 2
-        },
-        {
-          id: 4,
-          name: "BIOCICLE 4",
-          image: "img/produto1.png",
-          price: 30000,
-          dailyReturn: 6000,
-          totalReturn: 540000,
-          period: 90,
-          bonusLevel: 2
-        },
-        {
-          id: 5,
-          name: "BIOCICLE 5",
-          image: "img/produto1.png",
-          price: 80000,
-          dailyReturn: 16000,
-          totalReturn: 1440000,
-          period: 90,
-          bonusLevel: 3
-        },
-        {
-          id: 6,
-          name: "BIOCICLE 6",
-          image: "img/produto1.png",
-          price: 150000,
-          dailyReturn: 34000,
-          totalReturn: 3060000,
-          period: 90,
-          bonusLevel: 3
-        },
-        {
-          id: 7,
-          name: "BIOCICLE 7",
-          image: "img/produto1.png",
-          price: 300000,
-          dailyReturn: 60000,
-          totalReturn: 5400000,
-          period: 90,
-          bonusLevel: 4
-        },
-        {
-          id: 8,
-          name: "BIOCICLE 8",
-          image: "img/produto1.png",
-          price: 600000,
-          dailyReturn: 125000,
-          totalReturn: 11250000,
-          period: 90,
-          bonusLevel: 4
-        },
-        {
-          id: 9,
-          name: "BIOCICLE 9",
-          image: "img/produto1.png",
-          price: 1200000,
-          dailyReturn: 300000,
-          totalReturn: 27000000,
-          period: 90,
-          bonusLevel: 5
-        },
-        {
-          id: 10,
-          name: "BIOCICLE 10",
-          image: "img/produto1.png",
-          price: 2000000,
-          dailyReturn: 400000,
-          totalReturn: 36000000,
-          period: 90,
-          bonusLevel: 5
-        }
-      ];
+      // Dados dos produtos atualizados para 40 dias (totalReturn recalculado)
+const productsData = [
+  {
+    id: 1,
+    name: "BIOCICLE 1",
+    image: "img/produto1.png",
+    price: 2500,
+    dailyReturn: 500,
+    totalReturn: 20000, // 500 x 40
+    period: 40,
+    bonusLevel: 1
+  },
+  {
+    id: 2,
+    name: "BIOCICLE 2",
+    image: "img/produto1.png",
+    price: 5000,
+    dailyReturn: 1000,
+    totalReturn: 40000, // 1000 x 40
+    period: 40,
+    bonusLevel: 1
+  },
+  {
+    id: 3,
+    name: "BIOCICLE 3",
+    image: "img/produto1.png",
+    price: 10000,
+    dailyReturn: 2000,
+    totalReturn: 80000, // 2000 x 40
+    period: 40,
+    bonusLevel: 2
+  },
+  {
+    id: 4,
+    name: "BIOCICLE 4",
+    image: "img/produto1.png",
+    price: 30000,
+    dailyReturn: 6000,
+    totalReturn: 240000, // 6000 x 40
+    period: 40,
+    bonusLevel: 2
+  },
+  {
+    id: 5,
+    name: "BIOCICLE 5",
+    image: "img/produto1.png",
+    price: 80000,
+    dailyReturn: 16000,
+    totalReturn: 640000, // 16000 x 40
+    period: 40,
+    bonusLevel: 3
+  },
+  {
+    id: 6,
+    name: "BIOCICLE 6",
+    image: "img/produto1.png",
+    price: 150000,
+    dailyReturn: 34000,
+    totalReturn: 1360000, // 34000 x 40
+    period: 40,
+    bonusLevel: 3
+  },
+  {
+    id: 7,
+    name: "BIOCICLE 7",
+    image: "img/produto1.png",
+    price: 300000,
+    dailyReturn: 60000,
+    totalReturn: 2400000, // 60000 x 40
+    period: 40,
+    bonusLevel: 4
+  },
+  {
+    id: 8,
+    name: "BIOCICLE 8",
+    image: "img/produto1.png",
+    price: 600000,
+    dailyReturn: 125000,
+    totalReturn: 5000000, // 125000 x 40
+    period: 40,
+    bonusLevel: 4
+  },
+  {
+    id: 9,
+    name: "BIOCICLE 9",
+    image: "img/produto1.png",
+    price: 1200000,
+    dailyReturn: 300000,
+    totalReturn: 12000000, // 300000 x 40
+    period: 40,
+    bonusLevel: 5
+  },
+  {
+    id: 10,
+    name: "BIOCICLE 10",
+    image: "img/produto1.png",
+    price: 2000000,
+    dailyReturn: 400000,
+    totalReturn: 16000000, // 400000 x 40
+    period: 40,
+    bonusLevel: 5
+  }
+];
 
       // Função para obter o token do usuário
       function getUserToken() {

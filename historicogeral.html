@@ -42,14 +42,14 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Tema de Futebol - Verde e Branco */
-        .grass-background {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+        /* TEMA ALTERADO: Tema Laranja - Verde substituído por Laranja */
+        .orange-background {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .grass-background::before {
+        .orange-background::before {
             content: "";
             position: absolute;
             top: 0;
@@ -63,8 +63,8 @@
             pointer-events: none;
         }
 
-        .football-button {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        .orange-button {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
             color: white;
             border: 2px solid white;
             border-radius: 8px;
@@ -74,10 +74,10 @@
             transition: all 0.3s ease;
         }
 
-        .football-button:hover {
+        .orange-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
-            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
         }
 
         .white-card {
@@ -88,8 +88,8 @@
             border: 1px solid #e2e8f0;
         }
 
-        .nav-football {
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+        .nav-orange {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
         }
         
         .back-button {
@@ -170,26 +170,27 @@
             color: #666;
         }
 
+        /* ALTERADO: Botões de filtro em laranja */
         .filter-button {
             background: white;
-            border: 2px solid #22c55e;
+            border: 2px solid #f97316;
             border-radius: 8px;
             padding: 8px 16px;
             font-size: 12px;
             font-weight: 600;
-            color: #22c55e;
+            color: #f97316;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .filter-button.active {
-            background: #22c55e;
+            background: #f97316;
             color: white;
         }
 
         .filter-button:hover {
             transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
+            box-shadow: 0 2px 4px rgba(249, 115, 22, 0.2);
         }
 
         .icon-wrapper {
@@ -244,16 +245,17 @@
             opacity: 0.6;
         }
 
+        /* ALTERADO: Badge de data em laranja */
         .date-badge {
-            background: #f0fdf4;
+            background: #fff7ed;
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 12px;
-            color: #16a34a;
+            color: #ea580c;
             margin-bottom: 12px;
             display: inline-block;
             font-weight: 500;
-            border: 1px solid #bbf7d0;
+            border: 1px solid #fed7aa;
         }
 
         /* Container principal com scroll */
@@ -273,7 +275,7 @@
 
         /* Melhorias para dispositivos com notch */
         @supports(padding: max(0px)) {
-            .grass-background {
+            .orange-background {
                 padding-top: max(20px, env(safe-area-inset-top));
                 padding-bottom: max(20px, env(safe-area-inset-bottom));
             }
@@ -330,7 +332,7 @@
     </style>
 </head>
 
-<body class="bg-yellow-50 text-neutral-900">
+<body class="bg-orange-50 text-neutral-900"> <!-- ALTERADO: bg-yellow-50 para bg-orange-50 -->
   <!-- Loading overlay -->
   <div id="loadingOverlay" class="loading-overlay hidden">
     <div class="loading-content">
@@ -340,8 +342,8 @@
   </div>
 
   <div class="main-container max-w-[500px] mx-auto">
-    <!-- Header com tema de futebol -->
-    <div class="grass-background px-5 pt-6 pb-4 text-white relative overflow-hidden">
+    <!-- Header com tema laranja -->
+    <div class="orange-background px-5 pt-6 pb-4 text-white relative overflow-hidden"> <!-- ALTERADO: grass-background para orange-background -->
       <!-- Botão Voltar -->
       <button class="back-button" onclick="goBack()">
         <i class='bx bx-arrow-back'></i>
@@ -357,7 +359,7 @@
             <p class="text-2xl font-bold" id="currentBalance">KZ 0</p>
           </div>
           <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-            <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20"> <!-- ALTERADO: text-yellow-600 para text-orange-600 -->
               <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
               <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/>
             </svg>
@@ -383,7 +385,7 @@
     <div class="content-wrapper px-5">
       <!-- Estatísticas do período -->
       <div class="white-card mb-4">
-        <h3 class="font-semibold mb-3 text-yellow-800 flex items-center gap-2">
+        <h3 class="font-semibold mb-3 text-orange-800 flex items-center gap-2"> <!-- ALTERADO: text-yellow-800 para text-orange-800 -->
           <span class="icon-wrapper">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -392,9 +394,9 @@
           Resumo do Período
         </h3>
         <div class="grid grid-cols-2 gap-3 text-sm">
-                    <div class="text-center p-3 bg-yellow-50 rounded-lg">
-                        <p class="text-yellow-600 font-medium">Total Entradas</p>
-                        <p id="totalEntradas" class="font-bold text-yellow-800">KZ 0</p>
+                    <div class="text-center p-3 bg-orange-50 rounded-lg"> <!-- ALTERADO: bg-yellow-50 para bg-orange-50 -->
+                        <p class="text-orange-600 font-medium">Total Entradas</p> <!-- ALTERADO: text-yellow-600 para text-orange-600 -->
+                        <p id="totalEntradas" class="font-bold text-orange-800">KZ 0</p> <!-- ALTERADO: text-yellow-800 para text-orange-800 -->
           </div>
           <div class="text-center p-3 bg-red-50 rounded-lg">
             <p class="text-red-600 font-medium">Total Saídas</p>
@@ -405,7 +407,7 @@
 
       <!-- Lista de transações -->
       <div class="transactions-section">
-        <h3 class="font-semibold mb-3 text-yellow-800 flex items-center gap-2">
+        <h3 class="font-semibold mb-3 text-orange-800 flex items-center gap-2"> <!-- ALTERADO: text-yellow-800 para text-orange-800 -->
           <span class="icon-wrapper">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/>
@@ -426,7 +428,7 @@
 
       <!-- Última atualização -->
       <div class="text-center mt-4">
-        <p id="lastUpdate" class="text-xs text-yellow-600 flex items-center justify-center gap-1">
+        <p id="lastUpdate" class="text-xs text-orange-600 flex items-center justify-center gap-1"> <!-- ALTERADO: text-yellow-600 para text-orange-600 -->
           <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
           </svg>
@@ -897,7 +899,7 @@
                       <use href="#icon-refund"/>
                     </svg>
                     ${message}
-                    <button onclick="loadTransactionHistory()" class="mt-2 football-button text-sm">
+                    <button onclick="loadTransactionHistory()" class="mt-2 orange-button text-sm"> <!-- ALTERADO: football-button para orange-button -->
                         <svg class="w-4 h-4 mr-1 inline" fill="currentColor" viewBox="0 0 20 20">
                           <use href="#icon-refresh"/>
                         </svg>

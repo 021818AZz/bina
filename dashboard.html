@@ -45,7 +45,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #d97706;
+            background-color: #ea580c; /* Laranja mais forte */
             color: white;
             padding: 16px 24px;
             border-radius: 8px;
@@ -76,18 +76,30 @@
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
         }
-        
         
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* Gradientes de laranja */
+        .gradient-laranja-suave {
+            background: linear-gradient(135deg, #fdba74 0%, #fb923c 100%);
+        }
+        
+        .gradient-laranja-forte {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        }
+        
+        .gradient-laranja-escuro {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+        }
     </style>
 </head>
 
-<body class="bg-yellow-50 text-neutral-900 min-h-screen font-sans">
+<body class="bg-orange-50 text-neutral-900 min-h-screen font-sans">
     <div class="max-w-[500px] mx-auto min-h-screen pb-24">
         <!-- Toast para mensagens -->
         <div id="toast" class="toast hidden">
@@ -128,10 +140,10 @@
         <div class="px-4 -mt-4 mb-4">
             <div class="bg-white rounded-2xl p-4 shadow-lg">
                 <div class="flex gap-3">
-                    <a href="deposito.html" class="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-500 hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
+                    <a href="deposito.html" class="flex-1 gradient-laranja-forte hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
                         Recarregar
                     </a>
-                    <a href="retirada.html" class="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-500 hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
+                    <a href="retirada.html" class="flex-1 gradient-laranja-forte hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
                         Sacar
                     </a>
                 </div>
@@ -145,25 +157,25 @@
                 <div class="bg-white rounded-xl p-4 shadow card-hover relative">
                     <div class="absolute top-3 right-3 opacity-30">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#d97706"/>
-                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#d97706"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#f97316"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#f97316"/>
                         </svg>
                     </div>
                     <div class="text-center">
                         <p class="text-xs text-gray-500 mb-1">Ganhos de ontem</p>
-                        <p id="yesterday-earnings" class="text-base font-bold text-yellow-600 loading">KZ 0,00</p>
+                        <p id="yesterday-earnings" class="text-base font-bold text-orange-600 loading">KZ 0,00</p>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl p-4 shadow card-hover relative">
                     <div class="absolute top-3 right-3 opacity-30">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#d97706"/>
-                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#d97706"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#f97316"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#f97316"/>
                         </svg>
                     </div>
                     <div class="text-center">
                         <p class="text-xs text-gray-500 mb-1">Ganhos de hoje</p>
-                        <p id="today-earnings" class="text-base font-bold text-yellow-600 loading">KZ 0,00</p>
+                        <p id="today-earnings" class="text-base font-bold text-orange-600 loading">KZ 0,00</p>
                     </div>
                 </div>
                 
@@ -171,25 +183,25 @@
                 <div class="bg-white rounded-xl p-4 shadow card-hover relative">
                     <div class="absolute top-3 right-3 opacity-30">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#d97706"/>
-                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#d97706"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#f97316"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#f97316"/>
                         </svg>
                     </div>
                     <div class="text-center">
                         <p class="text-xs text-gray-500 mb-1">Ganhos desta semana</p>
-                        <p id="week-earnings" class="text-base font-bold text-yellow-600 loading">KZ 0,00</p>
+                        <p id="week-earnings" class="text-base font-bold text-orange-600 loading">KZ 0,00</p>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl p-4 shadow card-hover relative">
                     <div class="absolute top-3 right-3 opacity-30">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#d97706"/>
-                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#d97706"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#f97316"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#f97316"/>
                         </svg>
                     </div>
                     <div class="text-center">
                         <p class="text-xs text-gray-500 mb-1">Ganhos deste mês</p>
-                        <p id="month-earnings" class="text-base font-bold text-yellow-600 loading">KZ 0,00</p>
+                        <p id="month-earnings" class="text-base font-bold text-orange-600 loading">KZ 0,00</p>
                     </div>
                 </div>
                 
@@ -197,25 +209,25 @@
                 <div class="bg-white rounded-xl p-4 shadow card-hover relative">
                     <div class="absolute top-3 right-3 opacity-30">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#d97706"/>
-                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#d97706"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#f97316"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#f97316"/>
                         </svg>
                     </div>
                     <div class="text-center">
                         <p class="text-xs text-gray-500 mb-1">Renda da equipe</p>
-                        <p id="team-income" class="text-base font-bold text-yellow-600 loading">KZ 0,00</p>
+                        <p id="team-income" class="text-base font-bold text-orange-600 loading">KZ 0,00</p>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl p-4 shadow card-hover relative">
                     <div class="absolute top-3 right-3 opacity-30">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#d97706"/>
-                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#d97706"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#f97316"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#f97316"/>
                         </svg>
                     </div>
                     <div class="text-center">
                         <p class="text-xs text-gray-500 mb-1">Receita total</p>
-                        <p id="total-income" class="text-base font-bold text-yellow-600 loading">KZ 0,00</p>
+                        <p id="total-income" class="text-base font-bold text-orange-600 loading">KZ 0,00</p>
                     </div>
                 </div>
             </div>
@@ -223,9 +235,9 @@
             <!-- Campo Crescimento -->
             <div class="mt-4 text-center">
                 <div class="bg-white rounded-xl p-4 shadow card-hover">
-                    <p class="text-sm font-semibold text-yellow-800 mb-2">Crescimento</p>
-                    <div class="w-full bg-yellow-100 rounded-full h-3">
-                        <div id="growth-bar" class="bg-gradient-to-r from-yellow-500 to-yellow-600 h-3 rounded-full" style="width: 45%"></div>
+                    <p class="text-sm font-semibold text-orange-800 mb-2">Crescimento</p>
+                    <div class="w-full bg-orange-100 rounded-full h-3">
+                        <div id="growth-bar" class="gradient-laranja-forte h-3 rounded-full" style="width: 45%"></div>
                     </div>
                     <p id="growth-percentage" class="text-xs text-gray-600 mt-2">45% este mês</p>
                 </div>
@@ -235,7 +247,7 @@
         <!-- Cartões de informações adicionais -->
         <div class="px-4 mb-4">
             <div class="grid grid-cols-2 gap-3">
-                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl p-4 shadow card-hover">
+                <div class="gradient-laranja-forte text-white rounded-xl p-4 shadow card-hover">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-xs opacity-80 mb-1">Check-in Diário</p>
@@ -243,12 +255,12 @@
                         </div>
                         <i class='bx bx-calendar-check text-xl'></i>
                     </div>
-                    <button id="checkin-btn" class="mt-2 w-full bg-white text-yellow-600 py-1 rounded-lg text-xs font-semibold hover:bg-yellow-50 transition">
+                    <button id="checkin-btn" class="mt-2 w-full bg-white text-orange-600 py-1 rounded-lg text-xs font-semibold hover:bg-orange-50 transition">
                         Fazer Check-in
                     </button>
                 </div>
                 
-                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl p-4 shadow card-hover">
+                <div class="gradient-laranja-forte text-white rounded-xl p-4 shadow card-hover">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-xs opacity-80 mb-1">Membros na Equipe</p>
@@ -256,7 +268,7 @@
                         </div>
                         <i class='bx bx-group text-xl'></i>
                     </div>
-                    <a href="equipe.html" class="mt-2 block w-full bg-white text-yellow-600 py-1 rounded-lg text-xs font-semibold text-center hover:bg-yellow-50 transition">
+                    <a href="equipe.html" class="mt-2 block w-full bg-white text-orange-600 py-1 rounded-lg text-xs font-semibold text-center hover:bg-orange-50 transition">
                         Ver Equipe
                     </a>
                 </div>
@@ -265,7 +277,7 @@
 
         <!-- Cartão de bônus e convite -->
         <div class="px-4 mb-4">
-            <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-white rounded-xl p-4 shadow card-hover">
+            <div class="gradient-laranja-suave text-white rounded-xl p-4 shadow card-hover">
                 <div class="flex items-center justify-between mb-2">
                     <div>
                         <p class="text-sm font-semibold">Bônus de Convite</p>
@@ -277,7 +289,7 @@
                     <p class="text-xs mb-1">Seu código de convite</p>
                     <p id="invite-code" class="text-sm font-bold">CARREGANDO...</p>
                 </div>
-                <button onclick="copyInviteCode()" class="mt-2 w-full bg-white text-yellow-600 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-50 transition">
+                <button onclick="copyInviteCode()" class="mt-2 w-full bg-white text-orange-600 py-2 rounded-lg text-sm font-semibold hover:bg-orange-50 transition">
                     Copiar Código
                 </button>
             </div>
@@ -285,22 +297,22 @@
 
         <!-- Menu de navegação rápida -->
         <div class="px-4 mb-4">
-            <h3 class="text-lg font-bold text-yellow-800 mb-3">Acesso Rápido</h3>
+            <h3 class="text-lg font-bold text-orange-800 mb-3">Acesso Rápido</h3>
             <div class="grid grid-cols-4 gap-3 text-center">
                 <a href="renda.html" class="bg-white rounded-xl p-3 shadow card-hover">
-                    <i class='bx bx-trending-up text-yellow-600 text-xl mb-1'></i>
+                    <i class='bx bx-trending-up text-orange-600 text-xl mb-1'></i>
                     <p class="text-xs font-medium text-gray-700">Renda</p>
                 </a>
                 <a href="equipe.html" class="bg-white rounded-xl p-3 shadow card-hover">
-                    <i class='bx bx-star text-yellow-600 text-xl mb-1'></i>
+                    <i class='bx bx-star text-orange-600 text-xl mb-1'></i>
                     <p class="text-xs font-medium text-gray-700">VIP</p>
                 </a>
                 <a href="iban.html" class="bg-white rounded-xl p-3 shadow card-hover">
-                    <i class='bx bx-bank text-yellow-600 text-xl mb-1'></i>
+                    <i class='bx bx-bank text-orange-600 text-xl mb-1'></i>
                     <p class="text-xs font-medium text-gray-700">Banco</p>
                 </a>
                 <a href="historicogeral.html" class="bg-white rounded-xl p-3 shadow card-hover">
-                    <i class='bx bx-history text-yellow-600 text-xl mb-1'></i>
+                    <i class='bx bx-history text-orange-600 text-xl mb-1'></i>
                     <p class="text-xs font-medium text-gray-700">Histórico</p>
                 </a>
             </div>
@@ -308,7 +320,7 @@
 
        <!-- Menu de opções -->
 <div class="px-4 space-y-3 text-sm">
-  <a href="geral.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-yellow-50">
+  <a href="geral.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-orange-50">
     <div class="flex items-center gap-2">
       <img src="img/historico.png" alt="Histórico" class="w-5 h-5">
       <span>Histórico de Depósitos</span>
@@ -316,7 +328,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
   </a>
 
-  <a href="historico-saques.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-yellow-50">
+  <a href="historico-saques.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-orange-50">
     <div class="flex items-center gap-2">
       <img src="img/historico.png" alt="Retirada" class="w-5 h-5">
       <span>Histórico de Retiradas</span>
@@ -324,7 +336,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
   </a>
 
-  <a href="iban.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-yellow-50">
+  <a href="iban.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-orange-50">
     <div class="flex items-center gap-2">
       <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Cartão" class="w-5 h-5">
       <span>Número da Conta Bancária</span>
@@ -332,7 +344,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
   </a>
 
-  <a href="seting.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-yellow-50">
+  <a href="seting.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-orange-50">
     <div class="flex items-center gap-2">
       <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Senha" class="w-5 h-5">
       <span>Alterar Senha</span>
@@ -340,7 +352,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
   </a>
 
-  <a target="_blank" href="online.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-yellow-50">
+  <a target="_blank" href="online.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-orange-50">
     <div class="flex items-center gap-2">
       <img src="https://cdn-icons-png.flaticon.com/512/3449/3449720.png" alt="Suporte" class="w-5 h-5">
       <span>Serviço Online</span>
@@ -359,13 +371,13 @@
 
 <!-- Botão de logout -->
 <div class="text-center mt-6">
-  <button onclick="logout()" class="text-gray-500 text-sm hover:text-yellow-600 transition">Terminar Sessão</button>
+  <button onclick="logout()" class="text-gray-500 text-sm hover:text-orange-600 transition">Terminar Sessão</button>
 </div>
 
 
         <!-- Menu de navegação com ícones de imagem -->
-<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-yellow-100 rounded-t-2xl overflow-hidden">
-  <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 text-white text-xs">
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-orange-100 rounded-t-2xl overflow-hidden">
+  <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 text-white text-xs">
     
     <li>
       <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
@@ -441,11 +453,11 @@
             
             // Cor de fundo baseada no tipo
             if (type === 'success') {
-                toast.style.backgroundColor = '#f59e0b';
+                toast.style.backgroundColor = '#f97316';
             } else if (type === 'error') {
                 toast.style.backgroundColor = '#EF4444';
             } else {
-                toast.style.backgroundColor = '#d97706';
+                toast.style.backgroundColor = '#ea580c';
             }
             
             setTimeout(() => {
@@ -459,7 +471,7 @@
             const inviteCode = document.getElementById('invite-code').textContent;
             if (inviteCode && inviteCode !== 'CARREGANDO...') {
                 navigator.clipboard.writeText(inviteCode).then(() => {
-                    showToast('Código copiado para a área de transferência!', 'success');
+                    showToast('Código copiado para a área de transferência! 🍊', 'success');
                 }).catch(err => {
                     console.error('Erro ao copiar código: ', err);
                     showToast('Erro ao copiar código', 'error');
@@ -492,7 +504,7 @@
                 localStorage.removeItem('user_token');
                 localStorage.removeItem('user_id');
                 
-                showToast('Sessão terminada com sucesso', 'success');
+                showToast('Sessão terminada com sucesso 🍊', 'success');
                 
                 setTimeout(() => {
                     window.location.href = 'index.html';
@@ -929,7 +941,7 @@
                         if (response.ok) {
                             const data = await response.json();
                             if (data.success) {
-                                showToast('Check-in realizado! +5 KZ adicionados', 'success');
+                                showToast('Check-in realizado! +5 KZ adicionados 🍊', 'success');
                                 checkinBtn.disabled = true;
                                 checkinBtn.textContent = 'Concluído';
                                 

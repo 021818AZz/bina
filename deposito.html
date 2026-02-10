@@ -104,7 +104,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('img/novo.png');
+            background-image: url('https://via.placeholder.com/80/FFA500/FFFFFF?text=🏗️');
             background-size: cover;
             background-position: center;
             opacity: 0.9;
@@ -500,7 +500,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('img/novo.png');
+            background-image: url('https://via.placeholder.com/80/FFA500/FFFFFF?text=🏗️');
             background-size: 80px;
             background-position: right bottom;
             background-repeat: no-repeat;
@@ -562,7 +562,7 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            background-image: url('img/novo.png');
+            background-image: url('https://via.placeholder.com/20/FFA500/FFFFFF?text=🏗️');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -722,6 +722,11 @@
                 padding: 0.75rem;
             }
         }
+
+        /* Correção para modal visível */
+        .modal-active {
+            display: flex !important;
+        }
     </style>
 </head>
 
@@ -773,13 +778,13 @@
                         <label for="valorInput" class="text-sm font-medium text-yellow-800 block mb-1">Outro valor</label>
                         <div class="flex items-center bg-white border border-yellow-300 rounded-lg px-3 py-2">
                             <span class="text-yellow-600 font-semibold mr-2">KZ</span>
-                            <input required name="amount" id="valorInput" type="number" class="w-full bg-transparent outline-none placeholder-yellow-400 text-base" placeholder="Digite um valor" value="" min="5000" />
+                            <input required name="amount" id="valorInput" type="number" class="w-full bg-transparent outline-none placeholder-yellow-400 text-base" placeholder="Digite um valor" value="" min="2500" />
                         </div>
                     </div>
 
                     <div class="form-input-container">
                         <p class="text-sm font-medium text-yellow-800 mb-2">Escolha o banco para depósito</p>
-                        <div class="bank-info-construction" onclick="openBankModal()">
+                        <div class="bank-info-construction" onclick="openBankModal()" id="bankSelector">
                             <div class="flex items-center">
                                 <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3">
                                     <span class="construction-icon"></span>
@@ -803,7 +808,7 @@
                     <h2 class="text-sm font-bold">Informações de Recarga</h2>
                     <div class="flex items-start gap-2">
                         <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse mt-1 flex-shrink-0"></div>
-                        <p>O valor mínimo de recarga é de <strong>KZ 4.000</strong>.</p>
+                        <p>O valor mínimo de recarga é de <strong>KZ 2.500</strong>.</p>
                     </div>
 
                     <div class="flex items-start gap-2">
@@ -893,8 +898,8 @@
         </div>
 
         <!-- Modal de Seleção de Bancos com Símbolos de Construção -->
-        <div id="bankModal" class="fixed inset-0 z-50 hidden items-center justify-center backdrop-blur-sm bg-black/40" onclick="closeBankModal(event)">
-            <div onclick="event.stopPropagation()" class="construction-site compact-modal">
+        <div id="bankModal" class="fixed inset-0 z-50 hidden items-center justify-center backdrop-blur-sm bg-black/70">
+            <div class="construction-site compact-modal" onclick="event.stopPropagation()">
                 <div class="compact-modal-content">
                     <div class="flex justify-between items-center border-b border-yellow-300 pb-3 mb-3">
                         <h3 class="text-lg font-bold text-white">Selecione o Banco</h3>
@@ -908,12 +913,16 @@
                     <div class="construction-container" id="constructionContainer">
                         <!-- Os símbolos de construção serão inseridos aqui via JavaScript -->
                     </div>
+                    
+                    <div class="mt-4 text-center">
+                        <button onclick="closeBankModal()" class="construction-button px-6 py-2">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Loading -->
-        <div id="loading" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
+        <div id="loading" class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center">
             <div class="construction-site p-6 rounded-xl shadow-lg flex flex-col items-center mx-4">
                 <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
                 <p class="text-white text-center">Processando seu depósito...</p>
@@ -969,7 +978,7 @@
         let selectedBank = '';
         let depositAmount = 0;
 
-        // Informações dos bancos
+        // Informações dos bancos (CORRIGIDO: Todos os bancos agora estão disponíveis)
         const bankInfo = {
             'BAI': {
                 name: 'BAI',
@@ -1013,6 +1022,9 @@
             // Ajustar altura do container de construção
             adjustConstructionContainer();
             window.addEventListener('resize', adjustConstructionContainer);
+            
+            // Adicionar evento de clique ao seletor de banco
+            document.getElementById('bankSelector').addEventListener('click', openBankModal);
         });
 
         // Ajustar o container de construção conforme a tela
@@ -1020,7 +1032,7 @@
             const container = document.getElementById('constructionContainer');
             if (container) {
                 const width = container.offsetWidth;
-                const height = width * 0.75; // Manter proporção 4:3
+                const height = Math.min(width * 0.75, 250); // Limitar altura máxima
                 container.style.height = `${height}px`;
             }
         }
@@ -1091,34 +1103,43 @@
             }
         }
 
-        // Abrir modal de seleção de bancos
+        // Abrir modal de seleção de bancos (CORRIGIDO)
         function openBankModal() {
-            document.getElementById('bankModal').classList.remove('hidden');
-            document.getElementById('bankModal').classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Previne scroll do body
+            console.log('Abrindo modal de bancos...');
+            const modal = document.getElementById('bankModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex', 'modal-active');
+            document.body.style.overflow = 'hidden';
             
             // Inicializar os símbolos de construção
             initConstructionBalls();
         }
 
-        // Fechar modal
-        function closeBankModal(event) {
-            if (!event || event.target.id === "bankModal") {
-                document.getElementById("bankModal").classList.add("hidden");
-                document.getElementById("bankModal").classList.remove("flex");
-                document.body.style.overflow = 'auto'; // Restaura scroll
-            }
+        // Fechar modal (CORRIGIDO)
+        function closeBankModal() {
+            console.log('Fechando modal...');
+            const modal = document.getElementById('bankModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex', 'modal-active');
+            document.body.style.overflow = 'auto';
         }
 
-        // Inicializar os símbolos de construção
+        // Inicializar os símbolos de construção (CORRIGIDO: Mostrar todos os bancos)
         function initConstructionBalls() {
             const container = document.getElementById('constructionContainer');
+            if (!container) {
+                console.error('Container de construção não encontrado');
+                return;
+            }
+            
             container.innerHTML = '';
             
-            const banks = ['BAI', 'BFA', 'BIC', 'ATL'];
+            const banks = Object.keys(bankInfo); // ['BAI', 'BFA', 'BIC', 'ATL']
             const radius = Math.min(container.offsetWidth, container.offsetHeight) * 0.35;
             const centerX = container.offsetWidth / 2;
             const centerY = container.offsetHeight / 2;
+            
+            console.log('Criando bolas para bancos:', banks);
             
             banks.forEach((bankCode, index) => {
                 const ball = document.createElement('div');
@@ -1143,11 +1164,22 @@
                 
                 // Adicionar evento de clique
                 ball.addEventListener('click', () => selectConstructionBall(bankCode));
+                
+                console.log(`Bola criada para ${bankCode} em (${x}, ${y})`);
             });
+            
+            console.log('Total de bolas criadas:', container.children.length);
         }
 
-        // Selecionar um símbolo de construção
+        // Selecionar um símbolo de construção (CORRIGIDO)
         function selectConstructionBall(bankCode) {
+            console.log('Banco selecionado:', bankCode);
+            
+            if (!bankInfo[bankCode]) {
+                console.error('Banco não encontrado:', bankCode);
+                return;
+            }
+            
             selectedBank = bankCode;
             
             // Atualizar informações do banco selecionado
@@ -1157,16 +1189,18 @@
             
             // Fechar o modal
             closeBankModal();
+            
+            console.log('Banco selecionado com sucesso:', bankCode);
         }
 
-        // Validar formulário (na tela de seleção)
+        // Validar formulário (na tela de seleção) - CORRIGIDO valor mínimo
         function validateForm() {
             const valorInput = document.getElementById('valorInput');
             depositAmount = parseFloat(valorInput.value) || 0;
             
-            // Validar valor
-            if (!depositAmount || depositAmount < 4000) {
-                showError('Por favor, insira um valor válido (mínimo KZ 4.000)');
+            // Validar valor (MUDADO: mínimo 2500)
+            if (!depositAmount || depositAmount < 2500) {
+                showError('Por favor, insira um valor válido (mínimo KZ 2.500)');
                 return;
             }
             
@@ -1182,6 +1216,11 @@
 
         // Mostrar tela de informações bancárias
         function showBankDetails() {
+            if (!selectedBank || !bankInfo[selectedBank]) {
+                showError('Banco não selecionado corretamente');
+                return;
+            }
+            
             // Atualizar informações na tela de detalhes
             document.getElementById('detailBankName').textContent = bankInfo[selectedBank].fullName;
             document.getElementById('detailBeneficiary').textContent = bankInfo[selectedBank].beneficiary;
@@ -1202,6 +1241,8 @@
             document.getElementById('bankSelectionScreen').style.display = 'none';
             document.getElementById('bankDetailsScreen').style.display = 'block';
             window.scrollTo(0, 0);
+            
+            console.log('Dados preparados para depósito:', depositData);
         }
 
         // Voltar para a tela de seleção
